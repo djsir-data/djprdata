@@ -22,3 +22,7 @@ use_version("patch")
 use_news_md()
 use_vignette('djpr-import-r') # user guide
 
+# setup git branch rename master as main
+shell("git add .")
+shell('git commit -m "base package structure completed"')
+shell('git branch -m master main')
