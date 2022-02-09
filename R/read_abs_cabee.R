@@ -43,7 +43,7 @@ read_abs_cabee <- function(path = tempdir(), delete = TRUE) {
 
 	cabee_emp_raw <- tail(cabee_emp_raw, -6)
 
-	cabee_emp_raw$emp_date <- cabee_emp_raw_date
+	cabee_emp_raw$date <- cabee_emp_raw_date
 
 	cabee_turn_raw <- suppressMessages(
 		readxl::read_excel(file.path(path, file_names[grepl("11.xls", file_names)]),
@@ -67,9 +67,9 @@ read_abs_cabee <- function(path = tempdir(), delete = TRUE) {
 
 	cabee_turn_raw <- tail(cabee_turn_raw, -6)
 
-	cabee_turn_raw$turn_date <- cabee_turn_raw_date
+	cabee_turn_raw$date <- cabee_turn_raw_date
 
-	df_cabee <- dplyr::left_join(cabee_emp_raw, cabee_turn_raw, by = c("state_name", "lga_code", "lga_label", "industry_code", "industry_label", "total_no"))
+	df_cabee <- dplyr::left_join(cabee_emp_raw, cabee_turn_raw, by = c("date", "state_name", "lga_code", "lga_label", "industry_code", "industry_label", "total_no"))
 
 	if(delete){
 		unlink(file.path(path, file_names))
