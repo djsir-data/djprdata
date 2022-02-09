@@ -7,7 +7,7 @@
 https://www.abs.gov.au/statistics/economy/business-indicators/counts-australian-businesses-including-entries-and-exits/latest-release
 }
 \usage{
-read_abs_cabee(path = tempdir())
+read_abs_cabee(path = tempdir(), delete = TRUE)
 }
 \value{
 

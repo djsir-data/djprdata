@@ -19,4 +19,6 @@ VignetteBuilder: knitr
 Imports: 
     readxl,
     readabs,
-    magrittr
+    magrittr,
+    dplyr,
+    stringr
