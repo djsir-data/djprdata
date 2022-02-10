@@ -1,21 +1,10 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
 
 # djprdata
 
 <!-- badges: start -->
+
 [![R-CMD-Chk](https://github.com/djpr-data/djpr-import-r/workflows/R-CMD-Chk/badge.svg)](https://github.com/djpr-data/djpr-import-r/actions)
 [![codecov](https://github.com/djpr-data/djpr-import-r/workflows/codecov/badge.svg)](https://github.com/djpr-data/djpr-import-r/actions)
 <!-- badges: end -->
@@ -29,4 +18,3 @@ You can install the development version of djprdata like so:
 ``` r
 remotes::install_github('djpr-data/djpr-import-r)
 ```
-
