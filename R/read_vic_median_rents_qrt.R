@@ -14,6 +14,7 @@
 #' @import dplyr
 #' @importFrom purrr map_dfr
 #' @importFrom tidyr pivot_longer fill
+#' @importFrom lubridate month year
 #' @importFrom assertthat assert_that
 #' @importFrom glue glue
 #'
@@ -168,5 +169,6 @@ get_url_vic_median_rents_qrt <- function(){
               date = lubridate::parse_date_time(vic_median_rents_qrt, '%B%Y')))
 
 }
+
 
 
