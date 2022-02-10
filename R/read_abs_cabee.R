@@ -49,7 +49,7 @@ read_abs_cabee <- function(path = tempdir(), delete = TRUE) {
 		tidyr::pivot_longer(cols = names(cabee_emp_raw)[grepl("no.", names(cabee_emp_raw))], 
 					 		names_to = "category") %>%
 		dplyr::mutate(category = gsub(" no.", "", category),
-					  variable = "business_employment_range") %>%
+					  series = "business_employment_range") %>%
 		dplyr::rename_with(~ tolower(gsub(" ", "_", .x, fixed = TRUE)))
 
 	cabee_emp_raw$date <- cabee_emp_raw_date
@@ -84,7 +84,7 @@ read_abs_cabee <- function(path = tempdir(), delete = TRUE) {
 		tidyr::pivot_longer(cols = names(cabee_turn_raw)[grepl("no.", names(cabee_turn_raw))], 
 					 		names_to = "category") %>%
 		dplyr::mutate(category = gsub(" no.", "", category),
-					  variable = "business_turnover_range" ) %>%
+					  series = "business_turnover_range" ) %>%
 		dplyr::rename_with(~ tolower(gsub(" ", "_", .x, fixed = TRUE)))
 
 	cabee_turn_raw <- tail(cabee_turn_raw, -6)
