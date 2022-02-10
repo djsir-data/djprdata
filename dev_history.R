@@ -26,3 +26,8 @@ use_vignette('djpr-import-r') # user guide
 shell("git add .")
 shell('git commit -m "base package structure completed"')
 shell('git branch -m master main')
+
+
+
+# Add code coverage
+use_coverage(type = c("codecov"))
