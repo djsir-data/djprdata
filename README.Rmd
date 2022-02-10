@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 # djprdata
 
 <!-- badges: start -->
+[![R-CMD-Chk](https://github.com/djpr-data/djpr-import-r/workflows/R-CMD-Chk/badge.svg)](https://github.com/djpr-data/djpr-import-r/actions)
+[![codecov](https://github.com/djpr-data/djpr-import-r/workflows/codecov/badge.svg)](https://github.com/djpr-data/djpr-import-r/actions)
 <!-- badges: end -->
 
 The goal of djprdata is to ...
