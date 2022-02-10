@@ -10,6 +10,15 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
+Imports:
+    assertthat,
+    dplyr,
+    glue,
+    httr,
+    purrr,
+    readxl,
+    rvest,
+    tidyr
 Suggests: 
     knitr,
     rmarkdown,
