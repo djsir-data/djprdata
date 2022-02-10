@@ -56,34 +56,17 @@ read_vic_median_rents_qrt <- function(include = c('all','lga','metro'), test = F
 
   include <- match.arg(include, several.ok = FALSE)
 
-  url <- 'https://www.dffh.vic.gov.au/publications/rental-report'
-  url_config <- httr::parse_url(url)
+  url <- get_url_vic_median_rents_qrt()
 
-  links <- rvest::read_html(url) |>
-    html_elements('article') |>
-    html_elements('a') |>
-    html_attr('href')
-
-  # update url with latest file location
-  vic_median_rents_qrt <- grep('quarterly-median-rents-local-government-area',
-                               links,
-                               ignore.case = TRUE,
-                               value = TRUE)
-
-  url_config$path <- vic_median_rents_qrt
-  latest_url <- build_url(url_config)
-
-  date_latest <- lubridate::parse_date_time(vic_median_rents_qrt, '%B%Y')
-
-  message(glue::glue('Latest Data From: {format(date_latest, "%B %Y")}'))
+  message(glue::glue('Latest Data From: {format(url$date, "%B %Y")}'))
 
   # TODO: check here if data already downloaded?
 
   if (test) {
-    filename <- 'data-raw/vic_median_rents_qrt_testing.xlsx'
+    filename <- 'test_data/vic_median_rents_qrt_testing.xlsx'
   } else {
     filename <- tempfile(fileext = '.xlsx')
-    resp <- GET(test_url, write_disk(filename, overwrite=TRUE))
+    resp <- GET(url$url, write_disk(filename, overwrite=TRUE))
     status <- http_status(resp)
 
     assertthat::assert_that(status$category == "Success",
@@ -146,3 +129,44 @@ read_vic_median_rents_qrt <- function(include = c('all','lga','metro'), test = F
   return(out)
 
 }
+
+
+
+
+
+#' @title Get URL for latest Dataset
+#'
+#' @import rvest
+#' @import httr
+#'
+#' @return list
+#'
+#' @examples
+#'
+#' get_url_vic_median_rents_qrt()
+#'
+get_url_vic_median_rents_qrt <- function(){
+
+  url <- 'https://www.dffh.vic.gov.au/publications/rental-report'
+  url_config <- httr::parse_url(url)
+
+  links <- rvest::read_html(url) |>
+    html_elements('article') |>
+    html_elements('a') |>
+    html_attr('href')
+
+  # update url with latest file location
+  vic_median_rents_qrt <- grep('quarterly-median-rents-local-government-area',
+                               links,
+                               ignore.case = TRUE,
+                               value = TRUE)
+
+  url_config$path <- vic_median_rents_qrt
+
+  return(list(url = build_url(url_config),
+              base_url = url,
+              date = lubridate::parse_date_time(vic_median_rents_qrt, '%B%Y')))
+
+}
+
+
