@@ -21,6 +21,9 @@ jobs:
       - name: Install curl
         run: sudo apt-get install libcurl4-openssl-dev curl
 
+      - name: Install pkgdown dep
+        run: sudo apt-get install libharfbuzz-dev libfribidi-dev
+
       - name: Query dependencies
         run: |
           install.packages(c('remotes','pkgdown'))
