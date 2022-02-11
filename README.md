@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![R-CMD-Chk](https://github.com/djpr-data/djpr-import-r/workflows/R-CMD-Chk/badge.svg)](https://github.com/djpr-data/djpr-import-r/actions)
-[![codecov](https://github.com/djpr-data/djpr-import-r/workflows/codecov/badge.svg)](https://github.com/djpr-data/djpr-import-r/actions)
+[![codecov](https://codecov.io/gh/djpr-data/djpr-import-r/branch/main/graph/badge.svg?token=F870AJ43MI)](https://codecov.io/gh/djpr-data/djpr-import-r)
 <!-- badges: end -->
 
 The goal of djprdata is to import Vic Gov datasets into R
