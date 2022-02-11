@@ -57,7 +57,10 @@ read_vic_median_rents_qrt <- function(include = c('all','lga','metro'), test = F
 
   include <- match.arg(include, several.ok = FALSE)
 
-  url <- get_url_vic_median_rents_qrt()
+  url <- 'https://www.dffh.vic.gov.au/publications/rental-report'
+  search_term <- 'quarterly-median-rents-local-government-area'
+
+  url <- get_latest_download_url(url, search_term)
 
   message(glue::glue('Latest Data From: {format(url$date, "%B %Y")}'))
 
@@ -131,45 +134,6 @@ read_vic_median_rents_qrt <- function(include = c('all','lga','metro'), test = F
 
 }
 
-
-
-
-
-#' @title Get URL for latest Dataset
-#'
-#' @import rvest
-#' @import httr
-#'
-#' @return list
-#'
-#' @examples
-#' \dontrun{
-#'   dlpr::get_url_vic_median_rents_qrt()
-#' }
-#'
-get_url_vic_median_rents_qrt <- function(){
-
-  url <- 'https://www.dffh.vic.gov.au/publications/rental-report'
-  url_config <- httr::parse_url(url)
-
-  links <- rvest::read_html(url) |>
-    html_elements('article') |>
-    html_elements('a') |>
-    html_attr('href')
-
-  # update url with latest file location
-  vic_median_rents_qrt <- grep('quarterly-median-rents-local-government-area',
-                               links,
-                               ignore.case = TRUE,
-                               value = TRUE)
-
-  url_config$path <- vic_median_rents_qrt
-
-  return(list(url = build_url(url_config),
-              base_url = url,
-              date = lubridate::parse_date_time(vic_median_rents_qrt, '%B%Y')))
-
-}
 
 
 
