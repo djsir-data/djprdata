@@ -143,8 +143,9 @@ read_vic_median_rents_qrt <- function(include = c('all','lga','metro'), test = F
 #' @return list
 #'
 #' @examples
-#'
-#' get_url_vic_median_rents_qrt()
+#' \dontrun{
+#'   dlpr::get_url_vic_median_rents_qrt()
+#' }
 #'
 get_url_vic_median_rents_qrt <- function(){
 

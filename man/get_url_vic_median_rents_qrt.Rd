@@ -13,7 +13,8 @@ list
 Get URL for latest Dataset
 }
 \examples{
-
-get_url_vic_median_rents_qrt()
+\dontrun{
+  get_url_vic_median_rents_qrt()
+}
 
 }
