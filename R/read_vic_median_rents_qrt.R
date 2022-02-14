@@ -8,6 +8,16 @@
 #' each Local Government Area
 #'
 #' @note Replaces the data import component of \url{https://github.com/djpr-data/osd-nous-dashboard/blob/main/processing/rents-by-lga.R}
+#'
+#' @param include character the data set includes various spatial groupings
+#' that can be automatically filtered. Options are:
+#' \itemize{
+#'   \item{all}
+#'   \item{lga}
+#'   \item{metro}
+#' }
+#' @param test logical for testing to avoid repeatedly downloading data
+#'
 #' @import rvest
 #' @import httr
 #' @import readxl
@@ -53,7 +63,7 @@
 #'
 #'   rents_lga <- read_vic_median_rents_qrt(include = "lga")
 #' }
-read_vic_median_rents_qrt <- function(include = c('all','lga','metro'), test = FALSE){
+read_vic_median_rents <- function(include = c('all','lga','metro'), test = FALSE){
 
   include <- match.arg(include, several.ok = FALSE)
 
