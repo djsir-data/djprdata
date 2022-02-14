@@ -69,14 +69,9 @@ read_vic_median_rents_qrt <- function(include = c('all','lga','metro'), test = F
   if (test) {
     filename <- 'test_data/vic_median_rents_qrt_testing.xlsx'
   } else {
-    filename <- tempfile(fileext = '.xlsx')
-    resp <- GET(url$url, write_disk(filename, overwrite=TRUE))
-    status <- http_status(resp)
 
-    assertthat::assert_that(status$category == "Success",
-                            msg = glue('Download Failed with message: {status$message}'))
-    assertthat::assert_that(http_type(resp) == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                            msg = 'Failed to retrieve a Spreadsheet as Expected')
+    filename <- download_excel(url)
+
   }
 
   sheets <- readxl::excel_sheets(filename)
