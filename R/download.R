@@ -31,7 +31,10 @@
 #' }
 download_excel <- function(url, filepath = NULL, ext = '.xlsx', verbose = FALSE){
 
-  stopifnot(ext %in% c('.xlsx', '.xls'))
+  assertthat::assert_that(ext %in% c('.xlsx', '.xls'),
+                          msg = 'the extension provided is not recognised')
+  assertthat::assert_that(startsWith(ext, '.'),
+                          msg = 'the extension variable is passed to tempfile and needs a preceeding .')
 
   if (is.null(filepath)) {
     filepath <- tempfile(fileext = ext)

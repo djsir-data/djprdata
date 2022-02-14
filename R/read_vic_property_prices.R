@@ -77,7 +77,7 @@ read_vic_property_prices <- function(include = c('all','year','quarterly'), test
                                       grepl('unit', link, ignore.case = T) ~ 'unit',
                                       grepl('vacant', link, ignore.case = T) ~ 'vacant')
 
-    filename <- download_excel(link, 'xls')
+    filename <- download_excel(link, '.xls')
 
     suppressMessages({
       readxl::read_excel(filename, skip = 1, na = c('NA', '-')) |>
