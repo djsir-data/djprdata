@@ -25,12 +25,18 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/get_url_vic_median_rents_qrt.html</loc>
+    <loc>/reference/download_excel.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_latest_download_url.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/read_vic_median_rents_qrt.html</loc>
+    <loc>/reference/read_vic_median_rents.html</loc>
+  </url>
+  <url>
+    <loc>/reference/read_vic_property_prices.html</loc>
   </url>
 </urlset>
