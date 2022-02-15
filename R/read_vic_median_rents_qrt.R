@@ -8,6 +8,16 @@
 #' each Local Government Area
 #'
 #' @note Replaces the data import component of \url{https://github.com/djpr-data/osd-nous-dashboard/blob/main/processing/rents-by-lga.R}
+#'
+#' @param include character the data set includes various spatial groupings
+#' that can be automatically filtered. Options are:
+#' \itemize{
+#'   \item{all}
+#'   \item{lga}
+#'   \item{metro}
+#' }
+#' @param test logical for testing to avoid repeatedly downloading data
+#'
 #' @import rvest
 #' @import httr
 #' @import readxl
@@ -53,11 +63,14 @@
 #'
 #'   rents_lga <- read_vic_median_rents_qrt(include = "lga")
 #' }
-read_vic_median_rents_qrt <- function(include = c('all','lga','metro'), test = FALSE){
+read_vic_median_rents <- function(include = c('all','lga','metro'), test = FALSE){
 
   include <- match.arg(include, several.ok = FALSE)
 
-  url <- get_url_vic_median_rents_qrt()
+  url <- 'https://www.dffh.vic.gov.au/publications/rental-report'
+  search_term <- 'quarterly-median-rents-local-government-area'
+
+  url <- get_latest_download_url(url, search_term)
 
   message(glue::glue('Latest Data From: {format(url$date, "%B %Y")}'))
 
@@ -66,14 +79,9 @@ read_vic_median_rents_qrt <- function(include = c('all','lga','metro'), test = F
   if (test) {
     filename <- 'test_data/vic_median_rents_qrt_testing.xlsx'
   } else {
-    filename <- tempfile(fileext = '.xlsx')
-    resp <- GET(url$url, write_disk(filename, overwrite=TRUE))
-    status <- http_status(resp)
 
-    assertthat::assert_that(status$category == "Success",
-                            msg = glue('Download Failed with message: {status$message}'))
-    assertthat::assert_that(http_type(resp) == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                            msg = 'Failed to retrieve a Spreadsheet as Expected')
+    filename <- download_excel(url)
+
   }
 
   sheets <- readxl::excel_sheets(filename)
@@ -131,45 +139,6 @@ read_vic_median_rents_qrt <- function(include = c('all','lga','metro'), test = F
 
 }
 
-
-
-
-
-#' @title Get URL for latest Dataset
-#'
-#' @import rvest
-#' @import httr
-#'
-#' @return list
-#'
-#' @examples
-#' \dontrun{
-#'   dlpr::get_url_vic_median_rents_qrt()
-#' }
-#'
-get_url_vic_median_rents_qrt <- function(){
-
-  url <- 'https://www.dffh.vic.gov.au/publications/rental-report'
-  url_config <- httr::parse_url(url)
-
-  links <- rvest::read_html(url) |>
-    html_elements('article') |>
-    html_elements('a') |>
-    html_attr('href')
-
-  # update url with latest file location
-  vic_median_rents_qrt <- grep('quarterly-median-rents-local-government-area',
-                               links,
-                               ignore.case = TRUE,
-                               value = TRUE)
-
-  url_config$path <- vic_median_rents_qrt
-
-  return(list(url = build_url(url_config),
-              base_url = url,
-              date = lubridate::parse_date_time(vic_median_rents_qrt, '%B%Y')))
-
-}
 
 
 

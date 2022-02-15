@@ -12,6 +12,7 @@ LazyData: true
 RoxygenNote: 7.1.2
 Imports:
     assertthat,
+    crayon,
     dplyr,
     glue,
     httr,
@@ -19,6 +20,7 @@ Imports:
     purrr,
     readxl,
     rvest,
+    stringr,
     tidyr
 Suggests: 
     covr,

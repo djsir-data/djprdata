@@ -2,7 +2,7 @@
 
 test_that("Vic median rents file can be parsed", {
 
-  rent <- read_vic_median_rents_qrt(test = TRUE)
+  rent <- read_vic_median_rents(test = TRUE)
   columns <- colnames(rent)
 
   expect_s3_class(rent, 'data.frame')
@@ -23,7 +23,10 @@ test_that("Vic median rents file can be parsed", {
 
 test_that('Vic median rents URL has not changed', {
 
-  url <- djprdata:::get_url_vic_median_rents_qrt()
+  url <- 'https://www.dffh.vic.gov.au/publications/rental-report'
+  search_term <- 'quarterly-median-rents-local-government-area'
+
+  url <- get_latest_download_url(url, search_term)
 
   expect_false(httr::http_error(url$url))
   expect_false(httr::http_error(url$base_url))
