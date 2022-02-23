@@ -14,7 +14,11 @@
 #'   \item \url{https://github.com/djpr-data/osd-nous-dashboard/blob/main/processing/offences-rate-by-division-lga.R}
 #' }
 #'
+<<<<<<< HEAD
 #' @param dataset Required. select the database c("offence_by_location_by_lga", "offence_by_postcode_suburb", "offence_rate_by_lga")
+=======
+#' @param dataset Required. select the database c("offence_by_location_by_lga", "offence_by_postcode", "offence_rate_by_lga")
+>>>>>>> 32a6690b2bdb5bad504e80139fda77ab7aaa4422
 #' @param dim_code_input Optional. Filter by dim code (i.e. 11)
 #' @param lga_input Optional. Filter by LGA (i.e. "Alpine")
 #' @param suburb_input Optional. Filter by Suburb (i.e. "Dederang")
@@ -39,6 +43,7 @@
 #'
 #'   Alpine_lga_offence_rates <- read_vic_crime_stats(dataset = "offence_rate_by_lga", lga_input = "Alpine")
 #' }
+<<<<<<< HEAD
 read_vic_crime_stats <- function(dataset,
                                  lga_input,
                                  suburb_input,
@@ -58,6 +63,20 @@ read_vic_crime_stats <- function(dataset,
 
   stopifnot(!missing(dataset))
   stopifnot(is.character(dataset))
+=======
+read_vic_crime_stats <- function(dataset = NULL,
+                                 lga_input = NULL,
+                                 suburb_input = NULL,
+                                 dim_code_input = NULL,
+                                 offence_div_code_input = NULL
+                                 ){
+
+  if(is.null(dataset)){message("You must select a database, there are three to choose from:
+
+                               offence_by_location_by_lga
+                               offence_by_postcode
+                               offence_rate_by_lga")}else{
+>>>>>>> 32a6690b2bdb5bad504e80139fda77ab7aaa4422
 
   data_url <- 'https://www.crimestatistics.vic.gov.au/crime-statistics/latest-victorian-crime-data/download-data'
   search_term <- 'Data_Tables_LGA_Recorded_Offences'
@@ -81,7 +100,11 @@ read_vic_crime_stats <- function(dataset,
 
   if(dataset=="offence_by_location_by_lga"){
     df<-readxl::read_excel(filename,sheet = "Table 04")%>%
+<<<<<<< HEAD
       mutate(observation_date = as.Date(glue("{Year}-03-30")),
+=======
+      mutate(observation_date = glue("{Year}-03-30"),
+>>>>>>> 32a6690b2bdb5bad504e80139fda77ab7aaa4422
              value = `Offence Count`,
              dim_description = stringr::str_sub(`Location Subdivision`, 3, -1),
              dim_description = stringr::str_sub(dim_description,2,-1)) %>%
@@ -91,26 +114,45 @@ read_vic_crime_stats <- function(dataset,
       select(observation_date, local_government_area, location_subdivision, dim_code, value, dim_description) %>%
       group_by(observation_date, local_government_area, location_subdivision, dim_description, dim_code) %>%
       summarize(value = sum(value)) %>%
+<<<<<<< HEAD
       mutate(value = as.numeric(value)) %>%
+=======
+>>>>>>> 32a6690b2bdb5bad504e80139fda77ab7aaa4422
       ungroup()
 
     df_filtered <- df
 
+<<<<<<< HEAD
     if(!missing(lga_input)){
+=======
+    if(exists("lga_input")==TRUE){
+>>>>>>> 32a6690b2bdb5bad504e80139fda77ab7aaa4422
       df_filtered <- df_filtered%>%
         filter(.data$local_government_area == lga_input)
     }
 
+<<<<<<< HEAD
     if(!missing(dim_code_input)){
     df_filtered <- df_filtered%>%
       filter(.data$dim_code==dim_code_input)
+=======
+    if(exists("dim_code")==TRUE){
+    df_filtered <- df_filtered%>%
+      filter(.data$dim_code==dim_code)
+>>>>>>> 32a6690b2bdb5bad504e80139fda77ab7aaa4422
     }
 
   }
 
+<<<<<<< HEAD
   if(dataset=="offence_by_postcode_suburb"){
     df<-readxl::read_excel(filename,sheet = "Table 03")%>%
       mutate(observation_date = as.Date(glue("{Year}-09-30")),
+=======
+  if(dataset=="offence_by_postcode"){
+    df<-readxl::read_excel(filename,sheet = "Table 03")%>%
+      mutate(observation_date = glue("{Year}-09-30"),
+>>>>>>> 32a6690b2bdb5bad504e80139fda77ab7aaa4422
              value = `Offence Count`) %>%
       rename(local_government_area = `Local Government Area`,
              postcode = "Postcode",
@@ -124,11 +166,15 @@ read_vic_crime_stats <- function(dataset,
       select(observation_date, local_government_area, suburb, postcode, offence_div, offence_div_code, offence_subdiv, offence_subdiv_code, value) %>%
       group_by(observation_date, local_government_area, suburb, postcode, offence_div, offence_div_code) %>%
       summarize(value = sum(value)) %>%
+<<<<<<< HEAD
       mutate(value = as.numeric(value)) %>%
+=======
+>>>>>>> 32a6690b2bdb5bad504e80139fda77ab7aaa4422
       ungroup()
 
     df_filtered <- df
 
+<<<<<<< HEAD
     if(!missing(lga_input)){
       df_filtered <- df_filtered%>%
         filter(.data$local_government_area == lga_input)
@@ -142,6 +188,21 @@ read_vic_crime_stats <- function(dataset,
         filter(.data$postcode == postcode_input)
     }
     if(!missing(offence_div_code_input)){
+=======
+    if(exists("lga_input")==TRUE){
+      df_filtered <- df_filtered%>%
+        filter(.data$local_government_area == lga_input)
+    }
+    if(exists("suburb_input")==TRUE){
+      df_filtered <- df_filtered%>%
+        filter(.data$suburb == suburb_input)
+    }
+    if(exists("postcode_input")==TRUE){
+      df_filtered <- df_filtered%>%
+        filter(.data$postcode == postcode_input)
+    }
+    if(exists("offence_div_code_input")==TRUE){
+>>>>>>> 32a6690b2bdb5bad504e80139fda77ab7aaa4422
       df_filtered <- df_filtered%>%
         filter(.data$offence_div_code == offence_div_code_input)
     }
@@ -150,7 +211,11 @@ read_vic_crime_stats <- function(dataset,
 
   if(dataset=="offence_rate_by_lga"){
     df<-readxl::read_excel(filename,sheet = "Table 02")%>%
+<<<<<<< HEAD
       mutate(observation_date = as.Date(glue("{Year}-09-30")),
+=======
+      mutate(observation_date = glue("{Year}-09-30"),
+>>>>>>> 32a6690b2bdb5bad504e80139fda77ab7aaa4422
              value = `LGA Rate per 100,000 population`) %>%
       rename(local_government_area = `Local Government Area`,
              offence_div = `Offence Division`)%>%
@@ -159,17 +224,28 @@ read_vic_crime_stats <- function(dataset,
       select(observation_date, local_government_area, offence_div, offence_div_code, value) %>%
       group_by(observation_date, local_government_area, offence_div, offence_div_code) %>%
       summarize(value = sum(value)) %>%
+<<<<<<< HEAD
       mutate(value = as.numeric(value)) %>%
+=======
+>>>>>>> 32a6690b2bdb5bad504e80139fda77ab7aaa4422
       ungroup()
 
     df_filtered <- df
 
+<<<<<<< HEAD
     if(!missing(lga_input)){
+=======
+    if(exists("lga_input")==TRUE){
+>>>>>>> 32a6690b2bdb5bad504e80139fda77ab7aaa4422
       df_filtered <- df_filtered%>%
         filter(.data$local_government_area == lga_input)
     }
 
+<<<<<<< HEAD
     if(!missing(offence_div_code_input)){
+=======
+    if(exists("offence_div_code_input")==TRUE){
+>>>>>>> 32a6690b2bdb5bad504e80139fda77ab7aaa4422
       df_filtered <- df_filtered%>%
         filter(.data$offence_div_code == offence_div_code_input)
     }
@@ -178,6 +254,13 @@ read_vic_crime_stats <- function(dataset,
 
   df_filtered
 
+<<<<<<< HEAD
 }
 
 
+=======
+  }
+
+}
+
+>>>>>>> 32a6690b2bdb5bad504e80139fda77ab7aaa4422
