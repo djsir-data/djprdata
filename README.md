@@ -16,5 +16,5 @@ The goal of djprdata is to import Vic Gov datasets into R
 You can install the development version of djprdata like so:
 
 ``` r
-remotes::install_github('djpr-data/djpr-import-r)
+remotes::install_github('djpr-data/djpr-import-r')
 ```
