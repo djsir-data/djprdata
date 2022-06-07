@@ -1,7 +1,7 @@
 pandoc: 2.7.3
-pkgdown: 2.0.2
+pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   djpr-import-r: djpr-import-r.html
-last_built: 2022-04-01T05:17Z
+last_built: 2022-06-07T03:33Z
 
