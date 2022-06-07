@@ -2,6 +2,8 @@
 
 test_that("read_google_mobility works", {
 
+  testthat::skip_on_ci()
+
   gm <- read_google_mobility()
 
   expect_s3_class(gm, 'data.frame')
