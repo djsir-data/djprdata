@@ -1,5 +1,4 @@
-#load package
-pkgload::load_all(".")
+
 
 #tests
 test_that("Vic crime statistics file can be parsed", {
