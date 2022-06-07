@@ -19,3 +19,11 @@ test_that("read_google_mobility works", {
                                   "Residential","Transit stations"))
 
 })
+
+test_that('googlemobility URL exists', {
+
+  expect_true(
+    RCurl::url.exists(urls$read_google_mobility)
+  )
+
+})
