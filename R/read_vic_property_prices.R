@@ -61,11 +61,12 @@
 #'
 #'   rents_yearly <- read_vic_property_prices(include = "year")
 #' }
-read_vic_property_prices <- function(include = c('all','year','quarterly'), test = FALSE){
+read_vic_property_prices <- function(url = urls$read_vic_property_prices,
+                                     include = c('all','year','quarterly'),
+                                     test = FALSE){
 
   include <- match.arg(include, several.ok = FALSE)
 
-  url <- 'https://www.land.vic.gov.au/valuations/resources-and-reports/property-sales-statistics'
   search_term <- 'house|unit|vacant'
 
   links <- get_latest_download_url(url, search_term)

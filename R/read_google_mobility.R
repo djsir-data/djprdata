@@ -18,12 +18,11 @@
 #' \dontrun{
 #'   read_google_mobility()
 #' }
-read_google_mobility <- function(region = 'AU',
+read_google_mobility <- function(url = urls$read_google_mobility,
+                                 region = 'AU',
                                  sub_region_1 = 'Victoria',
                                  filepath = NULL,
                                  attribution = FALSE){
-
-  url <- "https://www.gstatic.com/covid19/mobility/Region_Mobility_Report_CSVs.zip"
 
   if (is.null(filepath)) {
     filepath <- tempfile(fileext = paste0('.', tools::file_ext(url)))
