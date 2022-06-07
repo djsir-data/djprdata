@@ -3,58 +3,46 @@
 #tests
 test_that("Vic crime statistics file can be parsed", {
 
-  dblist<-data.frame(c("offence_by_location_by_lga", "offence_by_postcode_suburb", "offence_rate_by_lga"))
-  colnames(dblist)<-"dataset"
+  dblist <- c("offence_by_location_by_lga", "offence_by_postcode_suburb", "offence_rate_by_lga")
 
-  for (i in 1:nrow(dblist)){
+  for (i in 1:length(dblist)){
 
-  data <- dblist$dataset[i]
-  crime <- read_vic_crime_stats(dataset = data, test = TRUE)
-  columns <- colnames(crime)
+    crime <- read_vic_crime_stats(dataset = dblist[i], test = TRUE)
+    columns <- colnames(crime)
 
 
-  expect_s3_class(crime, 'data.frame')
-
-  if(data == "offence_by_location_by_lga"){
-
-  expect_equal(columns, c("observation_date",
-                          "local_government_area",
-                          "location_subdivision",
-                          "dim_description",
-                          "dim_code",
-                          "value"))
-
-
-  expect_equal(class(crime$value), 'numeric')
-  expect_equal(class(crime$observation_date), 'Date')
-
-  }
-  if(data == "offence_by_postcode_suburb"){
-
-    expect_equal(columns, c("observation_date",
-                            "local_government_area",
-                            "suburb",
-                            "postcode",
-                            "offence_div",
-                            "offence_div_code",
-                            "value"))
-
+    expect_s3_class(crime, 'data.frame')
     expect_equal(class(crime$value), 'numeric')
     expect_equal(class(crime$observation_date), 'Date')
 
-  }
-  if(data == "offence_rate_by_lga"){
+    if (dblist[i] == "offence_by_location_by_lga"){
 
     expect_equal(columns, c("observation_date",
                             "local_government_area",
-                            "offence_div",
-                            "offence_div_code",
+                            "location_subdivision",
+                            "dim_description",
+                            "dim_code",
                             "value"))
 
-    expect_equal(class(crime$value), 'numeric')
-    expect_equal(class(crime$observation_date), 'Date')
+    } else if (dblist[i] == "offence_by_postcode_suburb") {
 
-  }
+      expect_equal(columns, c("observation_date",
+                              "local_government_area",
+                              "suburb",
+                              "postcode",
+                              "offence_div",
+                              "offence_div_code",
+                              "value"))
+
+    } else if (dblist[i] == "offence_rate_by_lga"){
+
+      expect_equal(columns, c("observation_date",
+                              "local_government_area",
+                              "offence_div",
+                              "offence_div_code",
+                              "value"))
+
+    }
 
   }
 
