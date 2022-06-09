@@ -63,11 +63,12 @@
 #'
 #'   rents_lga <- read_vic_median_rents_qrt(include = "lga")
 #' }
-read_vic_median_rents <- function(include = c('all','lga','metro'), test = FALSE){
+read_vic_median_rents <- function(url = urls$read_vic_median_rents,
+                                  include = c('all','lga','metro'),
+                                  test = FALSE){
 
   include <- match.arg(include, several.ok = FALSE)
 
-  url <- 'https://www.dffh.vic.gov.au/publications/rental-report'
   search_term <- 'quarterly-median-rents-local-government-area'
 
   url <- get_latest_download_url(url, search_term)

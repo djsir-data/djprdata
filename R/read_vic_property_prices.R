@@ -61,11 +61,12 @@
 #'
 #'   rents_yearly <- read_vic_property_prices(include = "year")
 #' }
-read_vic_property_prices <- function(include = c('all','year','quarterly'), test = FALSE){
+read_vic_property_prices <- function(url = urls$read_vic_property_prices,
+                                     include = c('all','year','quarterly'),
+                                     test = FALSE){
 
   include <- match.arg(include, several.ok = FALSE)
 
-  url <- 'https://www.land.vic.gov.au/valuations/resources-and-reports/property-sales-statistics'
   search_term <- 'house|unit|vacant'
 
   links <- get_latest_download_url(url, search_term)
@@ -83,8 +84,8 @@ read_vic_property_prices <- function(include = c('all','year','quarterly'), test
       readxl::read_excel(filename, skip = 1, na = c('NA', '-')) |>
         dplyr::rename(locality = 1) |>
         tidyr::pivot_longer(-1, names_to = 'cdate', values_to = 'median') |>
-        dplyr::mutate(time_scale = ifelse(nchar(cdate) == 4, 'year', 'quarterly'),
-                      type = property_type)
+        dplyr::mutate(time_scale = ifelse(nchar(.data$cdate) == 4, 'year', 'quarterly'),
+                      type = .env$property_type)
 
     })
 
@@ -93,16 +94,16 @@ read_vic_property_prices <- function(include = c('all','year','quarterly'), test
   suppressWarnings({
     property <- prop |>
       dplyr::distinct() |>
-      dplyr::filter(!is.na(locality),
-                    !(locality %in% c('2021','locality')),
-                    !is.na(median),
-                    !grepl('prelim|growth|sales|\\.\\.\\.', cdate, ignore.case = TRUE)) |>
-      tidyr::separate(col = cdate, c('qrts','qrte'), sep = '-', remove = FALSE) |>
-      dplyr::mutate(median = as.numeric(median),
-                    date = case_when(time_scale == 'year' ~ ceiling_date(as.Date(cdate, format = '%Y'), 'year') - 1,
-                                     time_scale == 'quarterly' ~ ceiling_date(lubridate::my(qrte), 'month') - 1),
-                    type = stringr::str_to_sentence(type)) |>
-      dplyr::mutate(across(c(locality, time_scale, type), as.factor)) |>
+      dplyr::filter(!is.na(.data$locality),
+                    !(.data$locality %in% c('2021','locality')),
+                    !is.na(.data$median),
+                    !grepl('prelim|growth|sales|\\.\\.\\.', .data$cdate, ignore.case = TRUE)) |>
+      tidyr::separate(col = .data$cdate, c('qrts','qrte'), sep = '-', remove = FALSE) |>
+      dplyr::mutate(median = as.numeric(.data$median),
+                    date = case_when(time_scale == 'year' ~ ceiling_date(as.Date(.data$cdate, format = '%Y'), 'year') - 1,
+                                     time_scale == 'quarterly' ~ ceiling_date(lubridate::my(.data$qrte), 'month') - 1),
+                    type = stringr::str_to_sentence(.data$type)) |>
+      dplyr::mutate(across(c(.data$locality, .data$time_scale, .data$type), as.factor)) |>
       dplyr::select(!dplyr::starts_with('q'))
   })
 

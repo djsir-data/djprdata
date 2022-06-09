@@ -6,11 +6,11 @@
 #' @examples
 
 read_abs_payroll <- function(path = tempdir(), delete = TRUE) {
-	cat_name <- readabs::search_catalogues("payroll")$catalogue
+
 
 	suppressMessages(
-	readabs::download_abs_data_cube("weekly-payroll-jobs-and-wages-australia", 
-									cube = "DO005", 
+	readabs::download_abs_data_cube("weekly-payroll-jobs-and-wages-australia",
+									cube = "DO005",
 									path = path)
 	)
 
@@ -39,4 +39,5 @@ read_abs_payroll <- function(path = tempdir(), delete = TRUE) {
 	}
 
 	df_payroll
+
 }

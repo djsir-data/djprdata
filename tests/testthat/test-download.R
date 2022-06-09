@@ -1,5 +1,6 @@
-test_that("test download fails with error", {
+test_that("test download excel fails with error", {
 
-  expect_error(download_excel('https://url.com'), "Failed to retrieve a Spreadsheet")
+  expect_error(download_excel('https://url.com/'),
+               "Unknown http status code: 525")
 
 })
