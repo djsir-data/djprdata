@@ -39,12 +39,12 @@ download_excel <- function(url, filepath = NULL, ext = '.xlsx', verbose = FALSE)
   if (is.null(filepath)) {
     filepath <- tempfile(fileext = ext)
   }
-  resp <- GET(url, write_disk(filepath, overwrite=TRUE))
-  status <- http_status(resp)
+  resp <- httr::GET(url, httr::write_disk(filepath, overwrite=TRUE))
+  status <- httr::http_status(resp)
 
   assertthat::assert_that(status$category == "Success",
                           msg = glue('Download Failed with message: {status$message}'))
-  assertthat::assert_that(http_type(resp) %in% c("application/vnd.ms-excel",
+  assertthat::assert_that(httr::http_type(resp) %in% c("application/vnd.ms-excel",
                                                  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"),
                           msg = 'Failed to retrieve a Spreadsheet as Expected')
 
@@ -56,3 +56,4 @@ download_excel <- function(url, filepath = NULL, ext = '.xlsx', verbose = FALSE)
   return(filepath)
 
 }
+

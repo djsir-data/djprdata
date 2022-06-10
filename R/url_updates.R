@@ -19,9 +19,9 @@
 get_latest_download_url <- function(url, search_term){
 
   links <- rvest::read_html(url) |>
-    #html_elements('article') |>
-    html_elements('a') |>
-    html_attr('href')
+    #rvest::html_elements('article') |>
+    rvest::html_elements('a') |>
+    rvest::html_attr('href')
 
   # update url with latest file location
   new_link <- grep(search_term,
@@ -33,7 +33,7 @@ get_latest_download_url <- function(url, search_term){
     if (is.null(httr::parse_url(x)$scheme)) {
       url_config <- httr::parse_url(url)
       url_config$path <- x
-      build_url(url_config)
+      httr::build_url(url_config)
     } else {x}
   })
 
