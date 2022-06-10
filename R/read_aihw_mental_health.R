@@ -1,4 +1,19 @@
-
+#' @title Australian Institute if Health and Welfare - Mental Health Data
+#'
+#' @description Extracting and cleaning payment data from the Australian Institute of
+#' Health and Welfare. The data includes episodes of care, presentations to emergency
+#' departments, number of community contracts, number of prescriptions. Each metric is
+#' reported in instances per 10,000 people.
+#'
+#' @param url Base url which contains links to all data, default value is: \link[https://www.aihw.gov.au/reports/mental-health-services/mental-health-services-in-australia/data/]
+#'
+#' @return data.frame
+#' @export
+#'
+#' @examples df <- read_aihw_care_episodes()
+#' @examples df <- read_aihw_emergency_presentations()
+#' @examples df <- read_aihw_community_care()
+#' @examples df <- read_aihw_prescriptions()
 
 # 1: Number of episodes of care per 10000 population
 read_aihw_care_episodes <- function(url = urls$read_aiwh_care_episodes) {
@@ -80,8 +95,6 @@ return(mh_comm_non_geo)
 
 # 4: Number of prescriptions per 1000 population
 
-
-
 read_aihw_prescriptions <- function(url = urls$read_aihw_prescriptions) {
 
   download.file(url, "data-raw/aihw/mental-health-prescriptions.xlsx", mode = "wb")
@@ -94,12 +107,12 @@ read_aihw_prescriptions <- function(url = urls$read_aihw_prescriptions) {
     filter(value != 'n.p.') %>%
     mutate(observation_date = as.character("2019-20"),
            value = as.numeric(value) * 10,
-           indicator_id = new_indicator_4$indicator_id,
+           indicator_id = 'Mental health-related prescriptions (per 10k population)',
            sa3_code = as.numeric(sa3_code)) %>%
     select(observationsa3_code)
 
 
-
+  return(non_geo_data)
 
 }
 
