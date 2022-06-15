@@ -8,6 +8,7 @@
 }
 \usage{
 read_google_mobility(
+  url = urls$read_google_mobility,
   region = "AU",
   sub_region_1 = "Victoria",
   filepath = NULL,
