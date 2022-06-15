@@ -108,25 +108,29 @@ read_aihw_prescriptions <- function(url = urls$read_aihw_prescriptions) {
 
 
 
+read_aihx_temp <- function(){
+
+
+  download.file("https://www.aihw.gov.au/getmedia/4d45a801-25ad-483a-9578-f5226e8d40c6/Mental-health-related-prescriptions-tables-20118-19.xlsx.aspx",
+                "raw-data/mental-health-prescrip.xlsx", mode = "wb")
+
+  mhp_orig <- read_excel("data-raw/mental-health-prescrip.xlsx",
+                         sheet = "Table PBS.10", skip = 3)
+
+  non_geo_data <- mhp_orig %>%
+    select(sa3_code = `SA3 code`,
+           value = `Rate of prescriptions (per 1000 of the specific population)`) %>%
+    filter(value != "n.p.") %>%
+    mutate(observation_date = as.character("2019-06-30"),
+           # multiply by 10 so they become rates per 10,000 of the population:
+           value = as.numeric(value) * 10,
+           indicator_id = new_indicator_4$indicator_id,
+           sa3_code = as.numeric(sa3_code)) %>%
+    filter(!is.na(value) & value != 0)
 
 
 
+}
 
 
-download.file("https://www.aihw.gov.au/getmedia/4d45a801-25ad-483a-9578-f5226e8d40c6/Mental-health-related-prescriptions-tables-20118-19.xlsx.aspx",
-                  "raw-data/mental-health-prescrip.xlsx", mode = "wb")
-
-mhp_orig <- read_excel("data-raw/mental-health-prescrip.xlsx",
-                       sheet = "Table PBS.10", skip = 3)
-
-non_geo_data <- mhp_orig %>%
-  select(sa3_code = `SA3 code`,
-         value = `Rate of prescriptions (per 1000 of the specific population)`) %>%
-  filter(value != "n.p.") %>%
-  mutate(observation_date = as.character("2019-06-30"),
-         # multiply by 10 so they become rates per 10,000 of the population:
-         value = as.numeric(value) * 10,
-         indicator_id = new_indicator_4$indicator_id,
-         sa3_code = as.numeric(sa3_code)) %>%
-  filter(!is.na(value) & value != 0)
 
