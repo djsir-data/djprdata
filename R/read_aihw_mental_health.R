@@ -1,26 +1,30 @@
-#' @title Australian Institute if Health and Welfare - Mental Health Data
+#' @title Australian Institute of Health and Welfare - Mental Health Data
 #'
-#' @description Extracting and cleaning payment data from the Australian Institute of
-#' Health and Welfare. The data includes episodes of care, presentations to emergency
-#' departments, number of community contracts, number of prescriptions. Each metric is
-#' reported in instances per 10,000 people.
+#' @description Extracting and cleaning yearly mental health data metrics
+#' published by AIHW. The functions collect data for public healthcare episodes,
+#' presentations and emergency departments, community care contacts and
+#' prescriptions.The data is transformed into 'per 10k population' measures.
 #'
-#' @param url Base url which contains links to all data, default value is: \link[https://www.aihw.gov.au/reports/mental-health-services/mental-health-services-in-australia/data/]
+#' @param url Base url which contains links to all data, default url is: \link[https://labourmarketinsights.gov.au/our-research/internet-vacancy-index/]
+#' @param filename Default filename is tempfile()
 #'
 #' @return data.frame
 #' @export
 #'
-#' @examples df <- read_aihw_care_episodes()
-#' @examples df <- read_aihw_emergency_presentations()
-#' @examples df <- read_aihw_community_care()
-#' @examples df <- read_aihw_prescriptions()
+#' @examples
+#' \dontrun{
+#'   df <- read_aihw_care_episodes()
+#'   df <- read_aihw_emergency_presentations()
+#'   df <- read_aihw_community_care()
+#'   df <- read_aihw_prescriptions()
+#'   }
 
 # 1: Number of episodes of care per 10000 population
-read_aihw_care_episodes <- function(url = urls$read_aiwh_care_episodes) {
+read_aihw_care_episodes <- function(url = urls$read_aihw_care_episodes, filename = tempfile()) {
 
-  download.file(url, "data-raw/aihw/mental-health-res.xlsx", mode = "wb")
+  download.file(url, filename, mode = "wb")
 
-  mh_res_orig <- readxl::read_excel("data-raw/aihw/mental-health-res.xlsx", sheet = "Table RMHC.18", skip = 3)
+  mh_res_orig <- readxl::read_excel(filename, sheet = "Table RMHC.18", skip = 3)
 
   mh_res_non_geo <- mh_res_orig %>%
     janitor::clean_names() %>%
@@ -40,11 +44,11 @@ read_aihw_care_episodes <- function(url = urls$read_aiwh_care_episodes) {
 }
 
 # 2: Number of presentations to emergency department per 10000 population
-read_aihw_emergency_presentations <- function(url = urls$read_aihw_emergency_presentations) {
+read_aihw_emergency_presentations <- function(url = urls$read_aihw_emergency_presentations, filename = tempfile()) {
 
-  download.file(url, "data-raw/aihw/mental-health-ed.xlsx", mode = "wb")
+  download.file(url, filename, mode = "wb")
 
-  mh_ed_orig <- readxl::read_excel("data-raw/aihw/mental-health-ed.xlsx", sheet = "Table ED.21", skip = 3)
+  mh_ed_orig <- readxl::read_excel(filename, sheet = "Table ED.21", skip = 3)
 
   mh_ed_non_geo <- mh_ed_orig %>%
     janitor::clean_names() %>%
@@ -72,11 +76,11 @@ read_aihw_emergency_presentations <- function(url = urls$read_aihw_emergency_pre
 # but data for 2019-20 is only at state/territory level (in Table CMHC.1) or remoteness area in Table CMHC.11 of
 # https://www.aihw.gov.au/getmedia/5642baad-f0ee-4b9e-9dea-ac3a43069775/Community-mental-health-care-tables-2018-19.xlsx.aspx
 
-read_aihw_community_care <- function(url = urls$read_aihw_community_care) {
+read_aihw_community_care <- function(url = urls$read_aihw_community_care, filename = tempfile()) {
 
-  download.file(url, "data-raw/aihw/mental-health-community.xlsx", mode = "wb")
+  download.file(url, filename, mode = "wb")
 
-  mh_comm_orig <- readxl::read_excel("data-raw/aihw/mental-health-community.xlsx", sheet = "Table CMHC.29", skip = 3)
+  mh_comm_orig <- readxl::read_excel(filename, sheet = "Table CMHC.29", skip = 3)
 
   mh_comm_non_geo <- mh_comm_orig %>%
     janitor::clean_names() %>%
@@ -95,11 +99,11 @@ return(mh_comm_non_geo)
 
 # 4: Number of prescriptions per 1000 population
 
-read_aihw_prescriptions <- function(url = urls$read_aihw_prescriptions) {
+read_aihw_prescriptions <- function(url = urls$read_aihw_prescriptions, filename = tempfile()) {
 
-  download.file(url, "data-raw/aihw/mental-health-prescriptions.xlsx", mode = "wb")
+  download.file(url, filename, mode = "wb")
 
-  mhp_orig <- readxl::read_excel("data-raw/aihw/mental-health-prescriptions.xlsx", sheet = "Table PBS.20", skip = 3)
+  mhp_orig <- readxl::read_excel(filename, sheet = "Table PBS.20", skip = 3)
 
   non_geo_data <- mhp_orig %>%
     filter(str_detect(Count, "Prescriptions")) %>%
@@ -115,31 +119,4 @@ read_aihw_prescriptions <- function(url = urls$read_aihw_prescriptions) {
   return(non_geo_data)
 
 }
-
-
-
-
-
-
-
-
-
-
-
-download.file("https://www.aihw.gov.au/getmedia/4d45a801-25ad-483a-9578-f5226e8d40c6/Mental-health-related-prescriptions-tables-20118-19.xlsx.aspx",
-                  "raw-data/mental-health-prescrip.xlsx", mode = "wb")
-
-mhp_orig <- read_excel("data-raw/mental-health-prescrip.xlsx",
-                       sheet = "Table PBS.10", skip = 3)
-
-non_geo_data <- mhp_orig %>%
-  select(sa3_code = `SA3 code`,
-         value = `Rate of prescriptions (per 1000 of the specific population)`) %>%
-  filter(value != "n.p.") %>%
-  mutate(observation_date = as.character("2019-06-30"),
-         # multiply by 10 so they become rates per 10,000 of the population:
-         value = as.numeric(value) * 10,
-         indicator_id = new_indicator_4$indicator_id,
-         sa3_code = as.numeric(sa3_code)) %>%
-  filter(!is.na(value) & value != 0)
 

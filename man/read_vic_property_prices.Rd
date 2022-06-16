@@ -29,7 +29,11 @@ A data frame with 11 variables. This is an active dataset rows increase weekly:
 \url{https://www.land.vic.gov.au/valuations/resources-and-reports/property-sales-statistics}
 }
 \usage{
-read_vic_property_prices(include = c("all", "year", "quarterly"), test = FALSE)
+read_vic_property_prices(
+  url = urls$read_vic_property_prices,
+  include = c("all", "year", "quarterly"),
+  test = FALSE
+)
 }
 \arguments{
 \item{include}{character the data set includes multiple temporal groupings

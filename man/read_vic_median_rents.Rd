@@ -33,7 +33,11 @@ A data frame with 11 variables. This is an active dataset rows increase weekly:
 \url{https://www.dffh.vic.gov.au/publications/rental-report}
 }
 \usage{
-read_vic_median_rents(include = c("all", "lga", "metro"), test = FALSE)
+read_vic_median_rents(
+  url = urls$read_vic_median_rents,
+  include = c("all", "lga", "metro"),
+  test = FALSE
+)
 }
 \arguments{
 \item{include}{character the data set includes various spatial groupings
