@@ -23,6 +23,9 @@ published by AIHW. The functions collect data for public healthcare episodes,
 presentations and emergency departments, community care contacts and
 prescriptions.The data is transformed into 'per 10k population' measures.
 }
+\note{
+1: Number of episodes of care per 10000 population
+}
 \examples{
 \dontrun{
   df <- read_aihw_care_episodes()
