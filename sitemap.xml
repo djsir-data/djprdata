@@ -43,10 +43,22 @@
     <loc>/reference/read_abs_payroll.html</loc>
   </url>
   <url>
+    <loc>/reference/read_dss_payments.html</loc>
+  </url>
+  <url>
     <loc>/reference/read_google_mobility.html</loc>
   </url>
   <url>
+    <loc>/reference/read_internet_vacancy.html</loc>
+  </url>
+  <url>
     <loc>/reference/read_ivi.html</loc>
+  </url>
+  <url>
+    <loc>/reference/read_jobseeker_payments.html</loc>
+  </url>
+  <url>
+    <loc>/reference/read_salm.html</loc>
   </url>
   <url>
     <loc>/reference/read_vic_crime_stats.html</loc>
@@ -56,5 +68,8 @@
   </url>
   <url>
     <loc>/reference/read_vic_property_prices.html</loc>
+  </url>
+  <url>
+    <loc>/reference/read_vic_schools_fte.html</loc>
   </url>
 </urlset>
