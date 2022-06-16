@@ -9,7 +9,10 @@
 #' @return data.frame
 #' @export
 #'
-#' @examples df <- read_dss_payments()
+#' @examples
+#' \dontrun{
+#'   df <- read_dss_payments()
+#' }
 #'
 read_dss_payments <- function(url = urls$read_dss_payments) {
 

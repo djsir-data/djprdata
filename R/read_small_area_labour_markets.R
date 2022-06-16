@@ -9,7 +9,10 @@
 #' @return data.frame
 #' @export
 #'
-#' @examples df <- read_salm()
+#' @examples
+#' \dontrun{
+#'   df <- read_salm()
+#' }
 
 read_salm <- function(url = urls$read_salm) {
 
