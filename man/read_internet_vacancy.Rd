@@ -24,5 +24,5 @@ for Melbourne from NSC's Internet Vacancy Report. Data is filtered by 2-digit AN
 \examples{
 \dontrun{
   df <- read_read_internet_vacancy()
-  }
+}
 }

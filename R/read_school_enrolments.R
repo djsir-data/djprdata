@@ -1,4 +1,5 @@
-read_school_enrolments_temp <- function(){
+read_vic_school_temp <- function(){
+
 
   # DET doesn't have this data readily available, so our approach is to:
   ## 1. Treat the list of schools in enrolment data as the definitive list of schools

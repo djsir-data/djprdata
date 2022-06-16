@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' df <- read_salm()
+#'   df <- read_salm()
 #' }
 
 read_salm <- function(url = urls$read_salm, filename = tempfile()) {

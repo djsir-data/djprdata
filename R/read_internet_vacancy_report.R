@@ -12,7 +12,7 @@
 #' @examples
 #' \dontrun{
 #'   df <- read_read_internet_vacancy()
-#'   }
+#' }
 
 read_internet_vacancy <- function(url = urls$read_internet_vacancy_report, filename = tempfile()) {
 

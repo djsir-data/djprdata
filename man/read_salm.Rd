@@ -20,6 +20,6 @@ by SA2 from the NSC's SALM Dataset.
 }
 \examples{
 \dontrun{
-df <- read_salm()
+  df <- read_salm()
 }
 }

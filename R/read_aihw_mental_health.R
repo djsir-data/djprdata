@@ -19,7 +19,7 @@
 #'   df <- read_aihw_prescriptions()
 #'   }
 
-# 1: Number of episodes of care per 10000 population
+#' @note 1: Number of episodes of care per 10000 population
 read_aihw_care_episodes <- function(url = urls$read_aihw_care_episodes, filename = tempfile()) {
 
   download.file(url, filename, mode = "wb")
@@ -43,7 +43,7 @@ read_aihw_care_episodes <- function(url = urls$read_aihw_care_episodes, filename
 
 }
 
-# 2: Number of presentations to emergency department per 10000 population
+#' @note  2: Number of presentations to emergency department per 10000 population
 read_aihw_emergency_presentations <- function(url = urls$read_aihw_emergency_presentations, filename = tempfile()) {
 
   download.file(url, filename, mode = "wb")
@@ -69,7 +69,7 @@ read_aihw_emergency_presentations <- function(url = urls$read_aihw_emergency_pre
 
 
 
-# 3: Number of contacts per 10000 population
+#' @note  3: Number of contacts per 10000 population
 
 # Note that timeseries data exists for community MH care by SA3 for FY14-FY18 in Table CMHC.29 of
 # https://www.aihw.gov.au/getmedia/4e93a556-b357-4741-8ab0-e31d93bed395/Community-mental-health-care-services-tables-2017-18.xlsx.aspx
@@ -97,7 +97,7 @@ return(mh_comm_non_geo)
 }
 
 
-# 4: Number of prescriptions per 1000 population
+#' @note  4: Number of prescriptions per 10000 population
 
 read_aihw_prescriptions <- function(url = urls$read_aihw_prescriptions, filename = tempfile()) {
 
@@ -119,4 +119,6 @@ read_aihw_prescriptions <- function(url = urls$read_aihw_prescriptions, filename
   return(non_geo_data)
 
 }
+
+
 
