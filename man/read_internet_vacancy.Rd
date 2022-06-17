@@ -4,11 +4,15 @@
 \alias{read_internet_vacancy}
 \title{National Skills Commission's Internet Vacancy Report}
 \usage{
-read_internet_vacancy(url = urls$read_internet_vacancy_report)
+read_internet_vacancy(
+  url = urls$read_internet_vacancy_report,
+  filename = tempfile()
+)
 }
 \arguments{
-\item{url}{Base url which contains links to all data, default value is:
-\link[https://labourmarketinsights.gov.au/our-research/internet-vacancy-index/]}
+\item{url}{Base url which contains links to all data, default url is: \link[https://labourmarketinsights.gov.au/our-research/internet-vacancy-index/]}
+
+\item{filename}{Default filename is tempfile()}
 }
 \value{
 data.frame
@@ -18,5 +22,7 @@ Extracting and cleaning monthly online job advertisements
 for Melbourne from NSC's Internet Vacancy Report. Data is filtered by 2-digit ANZSCO
 }
 \examples{
-df <- read_read_internet_vacancy()
+\dontrun{
+  df <- read_read_internet_vacancy()
+}
 }

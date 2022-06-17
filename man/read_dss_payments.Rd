@@ -4,10 +4,12 @@
 \alias{read_dss_payments}
 \title{DSS Payment Demographic Data}
 \usage{
-read_dss_payments(url = urls$read_dss_payments)
+read_dss_payments(url = urls$read_dss_payments, foldername = tempdir())
 }
 \arguments{
 \item{url}{Base url which contains links to all data, default value is: \link[https://data.gov.au/data/dataset/dss-payment-demographic-data/]}
+
+\item{filename}{Default folder name is tempdir()}
 }
 \value{
 data.frame
@@ -18,6 +20,8 @@ Social Services for each quarter back to September 2013. Data is transformed
 into long, and is filtered by LGA and payment type.
 }
 \examples{
-df <- read_dss_payments()
+\dontrun{
+  df <- read_dss_payments()
+}
 
 }

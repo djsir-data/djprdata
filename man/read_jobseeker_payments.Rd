@@ -19,5 +19,7 @@ from the Department of Social Services back to April 2020. Data
 is transformed into long, and is filtered by SA2.
 }
 \examples{
-df <- read_jobseeker_payments()
+\dontrun{
+  df <- read_jobseeker_payments()
+}
 }

@@ -4,11 +4,12 @@
 \alias{read_salm}
 \title{National Skills Commission's Small Area Labour Markets Estimates}
 \usage{
-read_salm(url = urls$read_salm)
+read_salm(url = urls$read_salm, filename = tempfile())
 }
 \arguments{
-\item{url}{Base url which contains links to all data, default value is:
-\link[https://labourmarketinsights.gov.au/regions/small-area-labour-markets/]}
+\item{url}{Base url which contains links to all data, default url is: \link[https://labourmarketinsights.gov.au/regions/small-area-labour-markets/]}
+
+\item{filename}{Default filename is tempfile()}
 }
 \value{
 data.frame
@@ -18,5 +19,7 @@ Extracting and cleaning quarterly unemployment rates
 by SA2 from the NSC's SALM Dataset.
 }
 \examples{
-df <- read_salm()
+\dontrun{
+  df <- read_salm()
+}
 }
