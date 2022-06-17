@@ -39,6 +39,6 @@ read_dese_childhood_services <- function(url = urls$read_dese_childhood_services
     mutate(number_of_services = ifelse(grepl("<", number_of_services), parse_number(number_of_services)/2, number_of_services),
            number_of_services = as.numeric(number_of_services) %>% round())
 
-}
+  return(v_childhood_services)
 
-df <- read_dese_childhood_services()
+}
