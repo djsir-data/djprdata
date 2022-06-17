@@ -54,13 +54,17 @@ by SA2 from the NSC's SALM Dataset.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_salm</span><span class="op">(</span>url <span class="op">=</span> <span class="va">urls</span><span class="op">$</span><span class="va">read_salm</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_salm</span><span class="op">(</span>url <span class="op">=</span> <span class="va">urls</span><span class="op">$</span><span class="va">read_salm</span>, filename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>url</dt>
-<dd><p>Base url which contains links to all data, default value is:</p></dd>
+<dd><p>Base url which contains links to all data, default url is:</p></dd>
+
+
+<dt>filename</dt>
+<dd><p>Default filename is tempfile()</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -72,8 +76,9 @@ by SA2 from the NSC's SALM Dataset.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">read_salm</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in as.tibble(djprdata:::get_latest_download_url(url, search_term)):</span> could not find function "as.tibble"</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span class="r-in">  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">read_salm</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

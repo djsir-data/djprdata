@@ -57,13 +57,17 @@ into long, and is filtered by LGA and payment type.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_dss_payments</span><span class="op">(</span>url <span class="op">=</span> <span class="va">urls</span><span class="op">$</span><span class="va">read_dss_payments</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_dss_payments</span><span class="op">(</span>url <span class="op">=</span> <span class="va">urls</span><span class="op">$</span><span class="va">read_dss_payments</span>, foldername <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>url</dt>
 <dd><p>Base url which contains links to all data, default value is:</p></dd>
+
+
+<dt>filename</dt>
+<dd><p>Default folder name is tempdir()</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -75,11 +79,9 @@ into long, and is filtered by LGA and payment type.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">read_dss_payments</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dplyr::filter(., str_detect(.data$filename, "demographic|demogrphics")):</span> Problem while computing `..1 = str_detect(.data$filename,</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> "demographic|demogrphics")`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `str_detect()`:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> could not find function "str_detect"</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span class="r-in">  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">read_dss_payments</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span class="op">}</span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
