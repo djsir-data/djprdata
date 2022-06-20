@@ -17,6 +17,7 @@ with(urls, {
   read_aihw_emergency_presentations <- "https://www.aihw.gov.au/getmedia/d3103c8d-b8cc-44fc-9afe-85cdefdb62e1/Mental-health-services-provided-in-emergency-departments.xlsx.aspx"
   read_aihw_community_care <- "https://www.aihw.gov.au/getmedia/4e93a556-b357-4741-8ab0-e31d93bed395/Community-mental-health-care-services-tables-2017-18.xlsx.aspx"
   read_aihw_prescriptions <- 'https://www.aihw.gov.au/getmedia/0be146b6-2be1-4110-8733-66e6e069b5a9/Mental-health-related-prescriptions.xlsx.aspx'
+  read_dese_childhood_services <- 'https://www.dese.gov.au/child-care-package/early-childhood-data-and-reports/quarterly-reports'
 
 
   })
