@@ -18,5 +18,7 @@ Extracting and cleaning monthly online job advertisements
 for Melbourne from NSC's Internet Vacancy Report. Data is filtered by 2-digit ANZSCO
 }
 \examples{
-df <- read_read_internet_vacancy()
+\dontrun{
+  df <- read_read_internet_vacancy()
+}
 }

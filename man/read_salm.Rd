@@ -18,5 +18,7 @@ Extracting and cleaning quarterly unemployment rates
 by SA2 from the NSC's SALM Dataset.
 }
 \examples{
-df <- read_salm()
+\dontrun{
+  df <- read_salm()
+}
 }

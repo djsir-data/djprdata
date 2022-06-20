@@ -18,6 +18,8 @@ Social Services for each quarter back to September 2013. Data is transformed
 into long, and is filtered by LGA and payment type.
 }
 \examples{
-df <- read_dss_payments()
+\dontrun{
+  df <- read_dss_payments()
+}
 
 }
