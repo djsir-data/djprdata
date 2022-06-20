@@ -112,13 +112,13 @@ read_aihw_prescriptions <- function(url = urls$read_aihw_prescriptions, filename
     mutate(observation_date = as.character("2019-20"),
            value = as.numeric(value) * 10,
            indicator_id = 'Mental health-related prescriptions (per 10k population)',
-           sa3_code = as.numeric(sa3_code)) %>%
-    select(observationsa3_code)
+           sa3_code = as.numeric(sa3_code))
 
 
   return(non_geo_data)
 
 }
+
 
 
 
