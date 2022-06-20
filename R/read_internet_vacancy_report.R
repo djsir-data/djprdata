@@ -3,8 +3,8 @@
 #' @description Extracting and cleaning monthly online job advertisements
 #' for Melbourne from NSC's Internet Vacancy Report. Data is filtered by 2-digit ANZSCO
 #'
-#' @param url Base url which contains links to all data, default value is:
-#' \link[https://labourmarketinsights.gov.au/our-research/internet-vacancy-index/]
+#' @param url Base url which contains links to all data, default url is: \link[https://labourmarketinsights.gov.au/our-research/internet-vacancy-index/]
+#' @param filename Default filename is tempfile()
 #'
 #' @return data.frame
 #' @export
@@ -14,15 +14,15 @@
 #'   df <- read_read_internet_vacancy()
 #' }
 
-read_internet_vacancy <- function(url = urls$read_internet_vacancy_report) {
+read_internet_vacancy <- function(url = urls$read_internet_vacancy_report, filename = tempfile()) {
 
   search_term <- 'ivi_data_regional-may-2010-onwards.xlsx'
 
   links <- djprdata:::get_latest_download_url(url, search_term)
 
-  djprdata:::download_excel(links$url, filepath = "data-raw/lim/internet_vacancies.xlsx")
+  djprdata:::download_excel(links$url, filepath = filename)
 
-  v_internet_vacancies <- readxl::read_xlsx("data-raw/lim/internet_vacancies.xlsx", sheet = "Averaged") %>%
+  v_internet_vacancies <- readxl::read_xlsx(filename, sheet = "Averaged") %>%
     filter(State == "VIC",
            !grepl("TOTAL", ANZSCO_TITLE)) %>%
     pivot_longer(-c(Level, State, region, ANZSCO_CODE, ANZSCO_TITLE), names_to = "date", values_to = "value") %>%

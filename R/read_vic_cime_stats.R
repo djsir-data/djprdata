@@ -14,7 +14,7 @@
 #'   \item \url{https://github.com/djpr-data/osd-nous-dashboard/blob/main/processing/offences-rate-by-division-lga.R}
 #' }
 #'
-#' @param dataset Required. select the database c("offence_by_location_by_lga", "offence_by_postcode_suburb", "offence_rate_by_lga")
+#' @param dataset Required. select the database c("offence_by_location_by_lga", "offence_by_postcode_suburb", "offence_rate_by_lga", "reported_offence_rate_lga")
 #' @param dim_code_input Optional. Filter by dim code (i.e. 11)
 #' @param lga_input Optional. Filter by LGA (i.e. "Alpine")
 #' @param suburb_input Optional. Filter by Suburb (i.e. "Dederang")
@@ -173,6 +173,20 @@ read_vic_crime_stats <- function(dataset,
       df_filtered <- df_filtered%>%
         filter(.data$offence_div_code == offence_div_code_input)
     }
+
+  }
+
+  if(dataset=='reported-offences-lga') {
+
+  df <- readxl::read_xlsx(filename, sheet = "Table 01") %>%
+    janitor::clean_names() %>%
+    mutate(observation_date = glue::glue("{year}-03-30")) %>%
+    mutate(observation_date = as.character(observation_date)) %>%
+    mutate(value = rate_per_100_000_population) %>%
+    select(observation_date, local_government_area, value)
+
+
+  df_filtered <- df
 
   }
 

@@ -18,7 +18,7 @@ read_vic_crime_stats(
 )
 }
 \arguments{
-\item{dataset}{Required. select the database c("offence_by_location_by_lga", "offence_by_postcode_suburb", "offence_rate_by_lga")}
+\item{dataset}{Required. select the database c("offence_by_location_by_lga", "offence_by_postcode_suburb", "offence_rate_by_lga", "reported_offence_rate_lga")}
 
 \item{lga_input}{Optional. Filter by LGA (i.e. "Alpine")}
 

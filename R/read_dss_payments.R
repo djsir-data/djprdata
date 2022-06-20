@@ -5,6 +5,7 @@
 #' into long, and is filtered by LGA and payment type.
 #'
 #' @param url Base url which contains links to all data, default value is: \link[https://data.gov.au/data/dataset/dss-payment-demographic-data/]
+#' @param filename Default folder name is tempdir()
 #'
 #' @return data.frame
 #' @export
@@ -14,7 +15,7 @@
 #'   df <- read_dss_payments()
 #' }
 #'
-read_dss_payments <- function(url = urls$read_dss_payments) {
+read_dss_payments <- function(url = urls$read_dss_payments, foldername = tempdir()) {
 
     # Find all the links to the xlsx files to download ----------------------------
 
@@ -45,14 +46,14 @@ read_dss_payments <- function(url = urls$read_dss_payments) {
   # ----- Download the data
 
   for (i in 1:nrow(links)) {
-    dest_loc <- glue::glue("data-raw/dss/{links$clean_filename[i]}.xlsx")
+    dest_loc <- glue::glue("{foldername}/{links$clean_filename[i]}.xlsx")
     download.file(links$url[i], dest_loc, mode = "wb")
   }
 
   # ----- Find which files have which pages
 
-  file_details <- tibble(filename = list.files("data-raw/dss")) %>%
-    mutate(filepath = glue::glue("data-raw/dss/{filename}"),
+  file_details <- tibble(filename = list.files(foldername)) %>%
+    mutate(filepath = glue::glue("{foldername}/{filename}"),
            year = str_sub(filename, 18, 21),
            month = str_sub(filename, 23, 25),
            quarter_end_date = lubridate::parse_date_time(glue::glue("{year}-{month}"), orders = "ym"))
