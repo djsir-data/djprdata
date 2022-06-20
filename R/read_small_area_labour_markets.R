@@ -19,7 +19,7 @@ read_salm <- function(url = urls$read_salm, filename = tempfile()) {
   search_term <- 'salm-smoothed-sa2'
 
   download_link <- djprdata:::get_latest_download_url(url, search_term) |>
-    as.tibble() |>
+    as_tibble() |>
     dplyr::select(url) |>
     dplyr::filter(str_detect(url, "\\.xlsx$")) |>
     mutate(filename = tolower(gsub(".*salm-smoothed-sa2-datafiles-asgs-2016-(.+).*", "\\1", url)))
