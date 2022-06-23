@@ -11,20 +11,20 @@
 #' }
 read_vic_schools_fte <- function(){
 
-  ckanr_setup(url = "https://discover.data.vic.gov.au/")
-  school_data = package_search('schools fte', as = 'table')
+  ckanr::ckanr_setup(url = "https://discover.data.vic.gov.au/")
+  school_data = ckanr::package_search('schools fte', as = 'table')
   all_resources <- school_data$results |>
-    mutate(url = map_chr(resources, ~.x$url),
+    dplyr::mutate(url = purrr::map_chr(resources, ~.x$url),
            year = stringr::str_extract(title, '\\d{4}')) |>
-    select(title, year, url)
+    dplyr::select(title, year, url)
 
   split(all_resources, all_resources$year) |>
-    map_dfr(function(x){
+    purrr::map_dfr(function(x){
       filename <- tempfile(fileext = '.csv')
-      download.file(x$url, filename)
-      df <- read_csv(filename) |>
-        rename_all(.funs = ~tolower(gsub('\\"', '', .x))) |>
-        mutate(year = x$year)
+      download.file(x$url, filename, mode = 'wb')
+      df <- readr::read_csv(filename) |>
+        dplyr::rename_all(.funs = ~tolower(gsub('\\"', '', .x))) |>
+        dplyr::mutate(year = x$year)
       print(colnames(df))
       df
     })
