@@ -1,8 +1,8 @@
 ---
-title: "djpr-import-r"
+title: "djprdata"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{djpr-import-r}
+  %\VignetteIndexEntry{djprdata}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
