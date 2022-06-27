@@ -60,15 +60,15 @@ each Local Government Area</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_vic_crime_stats</span><span class="op">(</span>
-  <span class="va">dataset</span>,
-  <span class="va">lga_input</span>,
-  <span class="va">suburb_input</span>,
-  <span class="va">postcode_input</span>,
-  <span class="va">dim_code_input</span>,
-  <span class="va">offence_div_code_input</span>,
-  test <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read_vic_crime_stats</span><span class="op">(</span></span>
+<span>  <span class="va">dataset</span>,</span>
+<span>  <span class="va">lga_input</span>,</span>
+<span>  <span class="va">suburb_input</span>,</span>
+<span>  <span class="va">postcode_input</span>,</span>
+<span>  <span class="va">dim_code_input</span>,</span>
+<span>  <span class="va">offence_div_code_input</span>,</span>
+<span>  test <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -112,11 +112,11 @@ each Local Government Area</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">lga_offence_rates</span> <span class="op">&lt;-</span> <span class="fu">read_vic_crime_stats</span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">"offence_rate_by_lga"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">Alpine_lga_offence_rates</span> <span class="op">&lt;-</span> <span class="fu">read_vic_crime_stats</span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">"offence_rate_by_lga"</span>, lga_input <span class="op">=</span> <span class="st">"Alpine"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">lga_offence_rates</span> <span class="op">&lt;-</span> <span class="fu">read_vic_crime_stats</span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">"offence_rate_by_lga"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">Alpine_lga_offence_rates</span> <span class="op">&lt;-</span> <span class="fu">read_vic_crime_stats</span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">"offence_rate_by_lga"</span>, lga_input <span class="op">=</span> <span class="st">"Alpine"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -128,7 +128,7 @@ each Local Government Area</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
     </footer></div>
