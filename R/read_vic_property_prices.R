@@ -70,7 +70,7 @@ read_vic_property_prices <- function(url = urls$read_vic_property_prices,
   search_term <- 'house|unit|vacant'
 
   links <- get_latest_download_url(url, search_term)
-  links$url <- links$url[endsWith(links$url, '.xls')]
+  links$url <- links$url[grepl('.xls|.xlsx', links$url)]
 
   prop <- map_dfr(links$url, function(link){
 
@@ -78,7 +78,8 @@ read_vic_property_prices <- function(url = urls$read_vic_property_prices,
                                       grepl('unit', link, ignore.case = T) ~ 'unit',
                                       grepl('vacant', link, ignore.case = T) ~ 'vacant')
 
-    filename <- download_excel(link, '.xls')
+    ext <- tools::file_ext(link) # account for xls and xlsx files
+    filename <- download_excel(link, ext)
 
     suppressMessages({
       readxl::read_excel(filename, skip = 1, na = c('NA', '-')) |>
