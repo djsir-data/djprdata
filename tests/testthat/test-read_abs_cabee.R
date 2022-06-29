@@ -2,8 +2,6 @@
 
 test_that("ABS Counts of Businesses including Entries and Exits works", {
 
-#  skip_on_ci()   # skip this test of it takes a lot of time, depending on the platform
-
   cabee <- read_abs_cabee()
 
   expect_s3_class(cabee, 'data.frame')
