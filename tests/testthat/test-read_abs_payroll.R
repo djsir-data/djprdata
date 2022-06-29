@@ -2,6 +2,8 @@
 
 test_that("ABS Weekly Payroll data works", {
 
+  skip_on_ci()      # this function takes a fair bit to run
+
   payroll <- read_abs_payroll()
 
   expect_s3_class(payroll, 'data.frame')
