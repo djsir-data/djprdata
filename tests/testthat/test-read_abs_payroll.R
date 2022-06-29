@@ -10,16 +10,14 @@ test_that("ABS Weekly Payroll data works", {
   expect_equal(class(payroll$value), 'numeric')
   expect_equal(class(payroll$date), 'Date')
 
-  expect_equal(colnames(payroll), c("state_name",
-                                  "lga_code",
-                                  "lga_label",
-                                  "industry_code",
-                                  "industry_label",
-                                  "category",
+  expect_equal(colnames(payroll), c("state_code",
+                                  "state_or_territory",
+                                  "sa4_code",
+                                  "statistical_area_level_4",
+                                  "sa3_code",
+                                  "statistical_area_level_3",
                                   "value",
-                                  "series",
-                                  "date",
-                                  "release"))
+                                  "date"))
 
 })
 
