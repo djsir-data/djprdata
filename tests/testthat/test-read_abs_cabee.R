@@ -25,7 +25,7 @@ test_that("ABS Counts of Businesses including Entries and Exits works", {
 test_that('read_abs_cabee URL exists', {
 
   expect_true(
-    RCurl::url.exists(urls$read_abs_cabee)
+    RCurl::url.exists(urls$read_abs_cabee)    # this test fails - dont know why
   )
 
 })
