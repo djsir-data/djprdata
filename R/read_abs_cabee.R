@@ -9,13 +9,13 @@ read_abs_cabee <- function(path = tempdir(), delete = TRUE) {
 	cat_name <- readabs::search_catalogues("entries and exits")$catalogue
 
 	suppressMessages(
-	readabs::download_abs_data_cube("counts-australian-businesses-including-entries-and-exits", 
-									cube = 10, 
+	readabs::download_abs_data_cube("counts-australian-businesses-including-entries-and-exits",
+									cube = 10,
 									path = path)
 	)
 	suppressMessages(
-	readabs::download_abs_data_cube("counts-australian-businesses-including-entries-and-exits", 
-									cube = 11, 
+	readabs::download_abs_data_cube("counts-australian-businesses-including-entries-and-exits",
+									cube = 11,
 									path = path)
 	)
 
@@ -27,7 +27,7 @@ read_abs_cabee <- function(path = tempdir(), delete = TRUE) {
 		)
 
 	cabee_emp_raw_release_time <- cabee_emp_raw %>%
-		dplyr::filter_all(dplyr::any_vars(stringr::str_detect(., pattern = "Released"))) 
+		dplyr::filter_all(dplyr::any_vars(stringr::str_detect(., pattern = "Released")))
 
 	cabee_emp_raw_release_time <- as.character(cabee_emp_raw_release_time[ , colSums(is.na(cabee_emp_raw_release_time)) == 0])
 
@@ -35,7 +35,7 @@ read_abs_cabee <- function(path = tempdir(), delete = TRUE) {
 		as.Date(format = "%d %B %Y")
 
 	cabee_emp_raw_time <- cabee_emp_raw %>%
-		dplyr::filter_all(dplyr::any_vars(stringr::str_detect(., pattern = "Local Government Area"))) 
+		dplyr::filter_all(dplyr::any_vars(stringr::str_detect(., pattern = "Local Government Area")))
 
 	cabee_emp_raw_time <- as.character(cabee_emp_raw_time[ , colSums(is.na(cabee_emp_raw_time)) == 0])
 
@@ -46,7 +46,7 @@ read_abs_cabee <- function(path = tempdir(), delete = TRUE) {
 	names(cabee_emp_raw) <- paste(cabee_emp_raw[5,], cabee_emp_raw[6,])
 
 	cabee_emp_raw <- tail(cabee_emp_raw, -6) %>%
-		tidyr::pivot_longer(cols = names(cabee_emp_raw)[grepl("no.", names(cabee_emp_raw))], 
+		tidyr::pivot_longer(cols = names(cabee_emp_raw)[grepl("no.", names(cabee_emp_raw))],
 					 		names_to = "category") %>%
 		dplyr::mutate(category = gsub(" no.", "", category),
 					  series = "business_employment_range") %>%
@@ -62,7 +62,7 @@ read_abs_cabee <- function(path = tempdir(), delete = TRUE) {
 		)
 
 	cabee_turn_raw_release_time <- cabee_turn_raw %>%
-		dplyr::filter_all(dplyr::any_vars(stringr::str_detect(., pattern = "Released"))) 
+		dplyr::filter_all(dplyr::any_vars(stringr::str_detect(., pattern = "Released")))
 
 	cabee_turn_raw_release_time <- as.character(cabee_turn_raw_release_time[ , colSums(is.na(cabee_turn_raw_release_time)) == 0])
 
@@ -70,7 +70,7 @@ read_abs_cabee <- function(path = tempdir(), delete = TRUE) {
 		as.Date(format = "%d %B %Y")
 
 	cabee_turn_raw_time <- cabee_turn_raw %>%
-		dplyr::filter_all(dplyr::any_vars(stringr::str_detect(., pattern = "Local Government Area"))) 
+		dplyr::filter_all(dplyr::any_vars(stringr::str_detect(., pattern = "Local Government Area")))
 
 	cabee_turn_raw_time <- as.character(cabee_turn_raw_time[ , colSums(is.na(cabee_turn_raw_time)) == 0])
 
@@ -81,7 +81,7 @@ read_abs_cabee <- function(path = tempdir(), delete = TRUE) {
 	names(cabee_turn_raw) <- paste(cabee_turn_raw[5,], cabee_turn_raw[6,])
 
 	cabee_turn_raw <- tail(cabee_turn_raw, -6) %>%
-		tidyr::pivot_longer(cols = names(cabee_turn_raw)[grepl("no.", names(cabee_turn_raw))], 
+		tidyr::pivot_longer(cols = names(cabee_turn_raw)[grepl("no.", names(cabee_turn_raw))],
 					 		names_to = "category") %>%
 		dplyr::mutate(category = gsub(" no.", "", category),
 					  series = "business_turnover_range" ) %>%
@@ -90,10 +90,11 @@ read_abs_cabee <- function(path = tempdir(), delete = TRUE) {
 	cabee_turn_raw <- tail(cabee_turn_raw, -6)
 
 	cabee_turn_raw$date <- cabee_turn_raw_date
-	
+
 	cabee_turn_raw$release <- cabee_turn_raw_release_date
 
-	df_cabee <- dplyr::bind_rows(cabee_emp_raw, cabee_turn_raw)
+	df_cabee <- dplyr::bind_rows(cabee_emp_raw, cabee_turn_raw) %>%
+	  mutate(value = as.numeric(value))
 
 	if(delete){
 		unlink(file.path(path, file_names))
