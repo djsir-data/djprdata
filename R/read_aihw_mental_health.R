@@ -36,8 +36,7 @@ read_aihw_care_episodes <- function(url = urls$read_aihw_care_episodes, filename
     # get rid of NAs
     filter(value != "n.p." & value != "0") %>%
     mutate(value = as.numeric(value),
-           observation_date = as.character(glue::glue("{as.numeric(str_sub(observation_date, 2, 5)) + 1}-06-30")), # financial year
-           indicator_id = 'Residential mental health care episodes (per 10k population)')
+           observation_date = as.character(glue::glue("{as.numeric(str_sub(observation_date, 2, 5)) + 1}-06-30")))
 
   return(mh_res_non_geo)
 
@@ -59,8 +58,7 @@ read_aihw_emergency_presentations <- function(url = urls$read_aihw_emergency_pre
     mutate(across(.cols = contains('x20'),.fns = as.numeric)) %>%
     pivot_longer(!sa3_code, names_to = "observation_date", values_to = "value") %>%
     mutate(value = as.numeric(value),
-           observation_date = as.character(glue::glue("{as.numeric(str_sub(observation_date, 2, 5)) + 1}-06-30")), # financial year
-           indicator_id = 'Presentations to emergency department (per 10k popultaion)') %>%
+           observation_date = as.character(glue::glue("{as.numeric(str_sub(observation_date, 2, 5)) + 1}-06-30"))) %>%
     filter(!is.na(value) & value != 0)
 
   return(mh_ed_non_geo)
@@ -88,8 +86,7 @@ read_aihw_community_care <- function(url = urls$read_aihw_community_care, filena
     select(-c(phn_code, phn_name, sa3_name, statistic)) %>%
     pivot_longer(!sa3_code, names_to = "observation_date", values_to = "value") %>%
     mutate(value = as.numeric(value),
-           observation_date = as.character(glue::glue("{as.numeric(str_sub(observation_date, 2, 5)) + 1}-06-30")), # financial year
-           indicator_id = 'Community Mental Health Care Cases (per 10k population') %>%
+           observation_date = as.character(glue::glue("{as.numeric(str_sub(observation_date, 2, 5)) + 1}-06-30"))) %>%
     filter(!is.na(value) & value != 0)
 
 return(mh_comm_non_geo)
@@ -111,14 +108,13 @@ read_aihw_prescriptions <- function(url = urls$read_aihw_prescriptions, filename
     filter(value != 'n.p.') %>%
     mutate(observation_date = as.character("2019-20"),
            value = as.numeric(value) * 10,
-           indicator_id = 'Mental health-related prescriptions (per 10k population)',
-           sa3_code = as.numeric(sa3_code)) %>%
-    select(observationsa3_code)
+           sa3_code = as.numeric(sa3_code))
 
 
   return(non_geo_data)
 
 }
+
 
 
 

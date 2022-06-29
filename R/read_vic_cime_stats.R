@@ -181,7 +181,7 @@ read_vic_crime_stats <- function(dataset,
   df <- readxl::read_xlsx(filename, sheet = "Table 01") %>%
     janitor::clean_names() %>%
     mutate(observation_date = glue::glue("{year}-03-30")) %>%
-    mutate(observation_date = as.character(observation_date)) %>%
+    mutate(observation_date = as.Date(observation_date)) %>%
     mutate(value = rate_per_100_000_population) %>%
     select(observation_date, local_government_area, value)
 

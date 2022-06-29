@@ -53,6 +53,7 @@ read_dss_payments <- function(url = urls$read_dss_payments, foldername = tempdir
   # ----- Find which files have which pages
 
   file_details <- tibble(filename = list.files(foldername)) %>%
+    filter(stringr::str_detect(filename, 'dss-demographics-') == TRUE) %>%
     mutate(filepath = glue::glue("{foldername}/{filename}"),
            year = str_sub(filename, 18, 21),
            month = str_sub(filename, 23, 25),
