@@ -1,10 +1,10 @@
-# testing read_internet_vacancy_report function
+# testing read_internet_vacancy function
 
-test_that("Read internet vacancy report works", {
+test_that("Read internet vacancy works", {
 
-  ivi <- read_internet_vacancy_report()
+  ivi <- read_internet_vacancy()
 
-  expect_s3_class(iva, 'data.frame')
+  expect_s3_class(ivi, 'data.frame')
   expect_equal(class(ivi$value), 'numeric')
   expect_equal(class(ivi$observation_date), 'Date')
 
@@ -15,11 +15,11 @@ test_that("Read internet vacancy report works", {
                                 "anzsco_title",
                                 "date",
                                 "value",
-                                "obeservation_date"))
+                                "observation_date"))
 
 })
 
-test_that('read_internet_vacancy_report URL exists', {
+test_that('read_internet_vacancy URL exists', {
 
   expect_true(
     RCurl::url.exists(urls$read_internet_vacancy_report)
