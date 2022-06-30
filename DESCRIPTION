@@ -22,6 +22,7 @@ Imports:
     purrr,
     RCurl,
     readabs,
+    readr,
     readxl,
     rvest,
     stringr,
