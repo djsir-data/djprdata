@@ -81,7 +81,9 @@ read_vic_median_rents <- function(url = urls$read_vic_median_rents,
     filename <- 'test_data/vic_median_rents_qrt_testing.xlsx'
   } else {
 
-    filename <- download_excel(url)
+    filename <- tryCatch({
+      download_excel(url$url)
+    }, error = function(e){download_excel(url$url)})
 
   }
 
