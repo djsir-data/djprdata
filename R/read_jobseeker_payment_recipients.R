@@ -25,7 +25,7 @@ read_jobseeker_payments <- function(url = urls$read_jobseeker_payments) {
   links <- rvest::html_attr(rvest::html_nodes(pg, "a"), "href") %>%
     as_tibble() %>%
     # Links to xlsx files only as these hold the data we need
-    filter(str_detect(value, "\\.xlsx$")) %>%
+    filter(stringr::str_detect(value, "\\.xlsx$")) %>%
     rename(url = value) %>%
     unique() %>%
     # Extract filename
