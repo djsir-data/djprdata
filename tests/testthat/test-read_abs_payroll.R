@@ -2,7 +2,7 @@
 
 test_that("ABS Weekly Payroll data works", {
 
-  skip_on_ci()      # this function takes a fair bit to run
+  skip_on_ci()      # this function takes a long time to run, so better to skip it on ci
 
   payroll <- read_abs_payroll()
 
