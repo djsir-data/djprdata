@@ -51,6 +51,7 @@ read_jobseeker_payments <- function(url = urls$read_jobseeker_payments) {
         keep_trying <- FALSE
       }, warning = function(e){
         print("second try")
+        keep_trying <- FALSE             # fail safe
       })
     }
 
