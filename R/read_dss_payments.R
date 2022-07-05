@@ -35,12 +35,12 @@ read_dss_payments <- function(url = urls$read_dss_payments, foldername = tempdir
     # Extract filename
     dplyr::mutate(filename = tolower(gsub(".*download/(.+).xlsx.*", "\\1", .data$url))) %>%
     # Drop non-demographic-related links (catch typo)
-    dplyr::filter(str_detect(.data$filename, "demographic|demogrphics")) %>%
+    dplyr::filter(stringr::str_detect(.data$filename, "demographic|demogrphics")) %>%
     # Fix anamalous filename for Sept 2015 (201509)
-    dplyr::mutate(filename = str_replace_all(.data$filename, "201509", "september-2015")) %>%
+    dplyr::mutate(filename = stringr::str_replace_all(.data$filename, "201509", "september-2015")) %>%
     # Extract month and year
-    dplyr::mutate(month = str_sub(str_extract(.data$filename, "march|mar|june|september|sept|december|dec"), 1, 3),
-           year = str_extract(filename, "[:digit:]+"),
+    dplyr::mutate(month = stringr::str_sub(stringr::str_extract(.data$filename, "march|mar|june|september|sept|december|dec"), 1, 3),
+           year = stringr::str_extract(filename, "[:digit:]+"),
            clean_filename = paste("dss-demographics", year, month, sep = "-"))
 
   # ----- Download the data
@@ -55,8 +55,8 @@ read_dss_payments <- function(url = urls$read_dss_payments, foldername = tempdir
   file_details <- tibble(filename = list.files(foldername)) %>%
     filter(stringr::str_detect(filename, 'dss-demographics-') == TRUE) %>%
     mutate(filepath = glue::glue("{foldername}/{filename}"),
-           year = str_sub(filename, 18, 21),
-           month = str_sub(filename, 23, 25),
+           year = stringr::str_sub(filename, 18, 21),
+           month = stringr::str_sub(filename, 23, 25),
            quarter_end_date = lubridate::parse_date_time(glue::glue("{year}-{month}"), orders = "ym"))
 
   file_details$has_sa2_sheet <- NA
@@ -123,7 +123,7 @@ read_dss_payments <- function(url = urls$read_dss_payments, foldername = tempdir
       filter(!is.na(lga_name) & !lga_name %in% c('Total', 'Unknown') & !grepl("Unincorp", lga) &
                !grepl("n.p", payments)) %>%
       # Some payments are presented like "<5" replace these with a value in the middle (since it's count)
-      mutate(payments = ifelse(grepl("<", payments), parse_number(payments)/2, payments),
+      mutate(payments = ifelse(grepl("<", payments), readr::parse_number(payments)/2, payments),
              payments = as.numeric(payments) %>% round())
 
     all_dss_lga <- all_dss_lga %>% rbind(dss_month_year)
