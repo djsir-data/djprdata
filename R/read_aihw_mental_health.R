@@ -29,14 +29,14 @@ read_aihw_care_episodes <- function(url = urls$read_aihw_care_episodes, filename
   mh_res_non_geo <- mh_res_orig %>%
     janitor::clean_names() %>%
     filter(counting_unit == "Episodes of\r\ncare" &
-             str_detect(measure, "Rate") &
+             stringr::str_detect(measure, "Rate") &
              state == "VIC") %>%
     select(-c(state, sa3_name, counting_unit, measure)) %>%
     pivot_longer(!sa3_code, names_to = "observation_date", values_to = "value") %>%
     # get rid of NAs
     filter(value != "n.p." & value != "0") %>%
     mutate(value = as.numeric(value),
-           observation_date = as.character(glue::glue("{as.numeric(str_sub(observation_date, 2, 5)) + 1}-06-30")))
+           observation_date = as.character(glue::glue("{as.numeric(stringr::str_sub(observation_date, 2, 5)) + 1}-06-30")))
 
   return(mh_res_non_geo)
 
@@ -51,14 +51,14 @@ read_aihw_emergency_presentations <- function(url = urls$read_aihw_emergency_pre
 
   mh_ed_non_geo <- mh_ed_orig %>%
     janitor::clean_names() %>%
-    filter(str_detect(type_of_presentation, "Mental") &
-             str_detect(statistic, "Rate") &
+    filter(stringr::str_detect(type_of_presentation, "Mental") &
+             stringr::str_detect(statistic, "Rate") &
              state_territory == "Victoria") %>%
     select(-c(type_of_presentation, state_territory, sa3_name, statistic)) %>%
     mutate(across(.cols = contains('x20'),.fns = as.numeric)) %>%
     pivot_longer(!sa3_code, names_to = "observation_date", values_to = "value") %>%
     mutate(value = as.numeric(value),
-           observation_date = as.character(glue::glue("{as.numeric(str_sub(observation_date, 2, 5)) + 1}-06-30"))) %>%
+           observation_date = as.character(glue::glue("{as.numeric(stringr::str_sub(observation_date, 2, 5)) + 1}-06-30"))) %>%
     filter(!is.na(value) & value != 0)
 
   return(mh_ed_non_geo)
@@ -82,11 +82,11 @@ read_aihw_community_care <- function(url = urls$read_aihw_community_care, filena
 
   mh_comm_non_geo <- mh_comm_orig %>%
     janitor::clean_names() %>%
-    filter(str_detect(statistic, "Rate of contacts") & !is.na(sa3_code)) %>%
+    filter(stringr::str_detect(statistic, "Rate of contacts") & !is.na(sa3_code)) %>%
     select(-c(phn_code, phn_name, sa3_name, statistic)) %>%
     pivot_longer(!sa3_code, names_to = "observation_date", values_to = "value") %>%
     mutate(value = as.numeric(value),
-           observation_date = as.character(glue::glue("{as.numeric(str_sub(observation_date, 2, 5)) + 1}-06-30"))) %>%
+           observation_date = as.character(glue::glue("{as.numeric(stringr::str_sub(observation_date, 2, 5)) + 1}-06-30"))) %>%
     filter(!is.na(value) & value != 0)
 
 return(mh_comm_non_geo)
@@ -103,7 +103,7 @@ read_aihw_prescriptions <- function(url = urls$read_aihw_prescriptions, filename
   mhp_orig <- readxl::read_excel(filename, sheet = "Table PBS.20", skip = 3)
 
   non_geo_data <- mhp_orig %>%
-    filter(str_detect(Count, "Prescriptions")) %>%
+    filter(stringr::str_detect(Count, "Prescriptions")) %>%
     select(sa3_code = `SA3 code`, value = last_col(offset = 1)) %>%
     filter(value != 'n.p.') %>%
     mutate(observation_date = as.character("2019-20"),
