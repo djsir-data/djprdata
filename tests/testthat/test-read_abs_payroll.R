@@ -16,15 +16,15 @@ test_that("ABS Weekly Payroll data works", {
                                   "statistical_area_level_4",
                                   "sa3_code",
                                   "statistical_area_level_3",
-                                  "value",
-                                  "date"))
+                                  "date",
+                                  "value"))
 
 })
 
 test_that('read_abs_payroll URL exists', {
 
   expect_true(
-    RCurl::url.exists(urls$read_abs_payroll)
+    RCurl::url.exists(urls$read_abs_payroll)        # url exists but test fails
   )
 
 })
