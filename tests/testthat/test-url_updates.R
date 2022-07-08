@@ -2,6 +2,7 @@
 
 test_that("Get URL for latest Dataset returns two URLs that exist", {
 
+  # Is it okay to hardcode an example, like this:
   url <- get_latest_download_url(
     url = "https://labourmarketinsights.gov.au/our-research/internet-vacancy-index/",
     search_term <- 'ivi_data_regional-may-2010-onwards.xlsx')
@@ -10,7 +11,6 @@ test_that("Get URL for latest Dataset returns two URLs that exist", {
     RCurl::url.exists(url$url))
 
   expect_true(
-    RCurl::url.exists(url$base_url)
-  )
+    RCurl::url.exists(url$base_url))
 
   })
