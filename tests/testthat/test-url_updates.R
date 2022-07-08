@@ -1,6 +1,6 @@
 # testing the get_latest_download_url() function
 
-test_that("Get URL for latest Dataset works", {
+test_that("Get URL for latest Dataset returns two URLs that exist", {
 
   url <- get_latest_download_url(
     url = "https://labourmarketinsights.gov.au/our-research/internet-vacancy-index/",
