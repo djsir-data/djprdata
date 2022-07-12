@@ -16,7 +16,7 @@ test_that("Read of DESE childhood services Data works", {
 test_that('read_dese_childhood_services URL exists', {
 
   expect_true(
-    RCurl::url.exists(urls$read_dese_childhood_services)        # url exists but test fails
+    RCurl::url.exists(urls$read_dese_childhood_services)
   )
 
 })
