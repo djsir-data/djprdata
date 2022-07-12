@@ -1,6 +1,6 @@
 
 
-#' @title School Enrollments for Victoria
+#' @title School Enrolments for Victoria
 #'
 #' @return
 #' @export

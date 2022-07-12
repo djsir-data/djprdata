@@ -1,6 +1,5 @@
 # testing read_vic_schools_fte function
 # there is no URL, urls$read_vic_schools_fte is NULL
-# function not finished yet, will wait for that and then write more tests
 
 test_that("read_vic_schools_fte works", {
 
@@ -95,6 +94,5 @@ test_that("read_vic_schools_fte works", {
                                 "postprimary ungraded females",
                                 "postprimary ungraded total",
                                 "census_type"))
-
 
 })
