@@ -22,9 +22,9 @@ test_that("ABS Counts of Businesses including Entries and Exits works", {
 
 })
 
-# test_that('read_abs_cabee URL exists', {
-#
-#   expect_true(
-#     RCurl::url.exists(urls$read_abs_cabee, .header = TRUE))    # this test fails bc of status = 403
-#
-# })
+test_that('read_abs_cabee URL exists', {
+
+  expect_true(
+    RCurl::url.exists(urls$read_abs_cabee, useragent="curl/7.39.0 Rcurl/1.95.4.5"))
+
+})

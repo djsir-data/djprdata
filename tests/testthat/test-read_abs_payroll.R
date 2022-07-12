@@ -21,10 +21,10 @@ test_that("ABS Weekly Payroll data works", {
 
 })
 
-# test_that('read_abs_payroll URL exists', {
-#
-#   expect_true(
-#     RCurl::url.exists(urls$read_abs_payroll, .header = TRUE) # url exists but test fails with status 403
-#   )
-#
-# })
+test_that('read_abs_payroll URL exists', {
+
+  expect_true(
+    RCurl::url.exists(urls$read_abs_payroll, useragent="curl/7.39.0 Rcurl/1.95.4.5")
+  )
+
+})

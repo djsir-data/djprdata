@@ -41,13 +41,9 @@ test_that("Vic crime statistics file can be parsed", {
                               "offence_div",
                               "offence_div_code",
                               "value"))
-
     }
-
   }
-
 })
-
 
 test_that('Vic crime stats URL has not changed', {
 
