@@ -24,7 +24,10 @@ Imports:
     readxl,
     rvest,
     stringr,
-    tidyr
+    tidyr,
+    ckanr,
+    janitor,
+    zip
 Suggests: 
     covr,
     knitr,
