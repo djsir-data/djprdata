@@ -27,7 +27,10 @@ Imports:
     tidyr,
     ckanr,
     janitor,
-    zip
+    zip,
+    fs,
+    openxlsx,
+    readr
 Suggests: 
     covr,
     knitr,

@@ -12,6 +12,7 @@
 #' @param attribution logical include Google attribution statement
 #'
 #' @importFrom zip unzip zip_list
+#' @importFrom fs path_dir
 #'
 #' @return data.frame
 #' @export

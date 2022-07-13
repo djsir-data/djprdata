@@ -7,6 +7,7 @@
 #' @param filename Default filename is tempfile()
 #'
 #' @importFrom janitor clean_names
+#' @importFrom openxlsx convertToDate
 #'
 #' @return data.frame
 #' @export

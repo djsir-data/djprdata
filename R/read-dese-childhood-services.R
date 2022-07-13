@@ -6,6 +6,7 @@
 #' @param filename Default file name is tempfile()
 #'
 #' @importFrom janitor clean_names
+#' @importFrom readr parse_number
 #'
 #' @return data.frame
 #' @export
