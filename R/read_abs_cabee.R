@@ -45,7 +45,7 @@ read_abs_cabee <- function(path = tempdir(), delete = TRUE) {
 
 	names(cabee_emp_raw) <- paste(cabee_emp_raw[5,], cabee_emp_raw[6,])
 
-	cabee_emp_raw <- tail(cabee_emp_raw, -6) %>%
+	cabee_emp_raw <- utils::tail(cabee_emp_raw, -6) %>%
 		tidyr::pivot_longer(cols = names(cabee_emp_raw)[grepl("no.", names(cabee_emp_raw))],
 					 		names_to = "category") %>%
 		dplyr::mutate(category = gsub(" no.", "", category),

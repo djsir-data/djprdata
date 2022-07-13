@@ -24,7 +24,7 @@ read_abs_payroll <- function(path = tempdir(), delete = TRUE) {
 	names(df_payroll) <- tolower(gsub(" ", "_", as.character(df_payroll[5,])))
 
 	df_payroll <- df_payroll %>%
-		tail(-5) %>%
+		utils::tail(-5) %>%
 		tidyr::pivot_longer(cols = 4:dplyr::last_col(),
 					 names_to = "date") %>%
 		dplyr::filter(!grepl("NA",value)) %>%

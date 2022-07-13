@@ -18,14 +18,14 @@ read_dese_childhood_services <- function(url = urls$read_dese_childhood_services
 
   search_term <- 'child-care-australia-report'
 
-  links <- djprdata:::get_latest_download_url(url, search_term) %>%
+  links <- get_latest_download_url(url, search_term) %>%
     as_tibble() %>%
     dplyr::mutate(date_ref = stringr::str_sub(url, start = stringr::str_locate(url, 'quarterly-reports/child-care-australia-report-')[,2] + 1),
                   download_link = glue::glue('https://www.dese.gov.au/early-childhood/resources/{date_ref}'))
 
-  current_download_url <- djprdata:::get_latest_download_url(links$download_link[1], 'xlsx')
+  current_download_url <- get_latest_download_url(links$download_link[1], 'xlsx')
 
-  djprdata:::download_excel(current_download_url$url, filepath = filename)
+  download_excel(current_download_url$url, filepath = filename)
 
 
   v_childhood_services <- readxl::read_xlsx(filename,

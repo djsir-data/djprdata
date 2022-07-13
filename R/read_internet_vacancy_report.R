@@ -18,9 +18,9 @@ read_internet_vacancy <- function(url = urls$read_internet_vacancy_report, filen
 
   search_term <- 'ivi_data_regional-may-2010-onwards.xlsx'
 
-  links <- djprdata:::get_latest_download_url(url, search_term)
+  links <- get_latest_download_url(url, search_term)
 
-  djprdata:::download_excel(links$url, filepath = filename)
+  download_excel(links$url, filepath = filename)
 
   v_internet_vacancies <- readxl::read_xlsx(filename, sheet = "Averaged") %>%
     filter(State == "VIC",
