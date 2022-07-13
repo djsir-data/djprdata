@@ -6,6 +6,8 @@
 #' @param url Base url which contains links to all data, default url is: \link[https://labourmarketinsights.gov.au/our-research/internet-vacancy-index/]
 #' @param filename Default filename is tempfile()
 #'
+#' @importFrom janitor clean_names
+#'
 #' @return data.frame
 #' @export
 #'

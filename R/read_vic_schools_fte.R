@@ -2,6 +2,8 @@
 
 #' @title School Enrolments for Victoria
 #'
+#' @importFrom ckanr ckanr_setup package_search
+#'
 #' @return
 #' @export
 #'

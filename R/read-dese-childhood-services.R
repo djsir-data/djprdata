@@ -5,6 +5,8 @@
 #' @param url Base url which contains links to all data, default value is: \link[https://www.dese.gov.au/child-care-package/early-childhood-data-and-reports/quarterly-reports/]
 #' @param filename Default file name is tempfile()
 #'
+#' @importFrom janitor clean_names
+#'
 #' @return data.frame
 #' @export
 #'
