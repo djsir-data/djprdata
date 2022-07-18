@@ -32,7 +32,8 @@ read_salm <- function(url = urls$read_salm, filename = tempfile()) {
     rename_with(.cols = dplyr::starts_with('4'), ~ as.character(as.Date(as.integer(.x), origin = '1899-12-30'))) |>
     rename(region = `SA2 Code (2016 ASGS)`, sa2_name = `Statistical Area Level 2 (SA2) (2016 ASGS)`) |>
     pivot_longer(cols = contains('-01'), names_to = 'date', values_to = 'value') |>
-    mutate(value = as.numeric(value) / 100)
+    mutate(value = as.numeric(value) / 100,
+           date = as.Date(date))
 
 return(unemprate_orig)
 

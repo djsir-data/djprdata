@@ -38,7 +38,8 @@ read_aihw_care_episodes <- function(url = urls$read_aihw_care_episodes, filename
     # get rid of NAs
     filter(value != "n.p." & value != "0") %>%
     mutate(value = as.numeric(value),
-           observation_date = as.character(glue::glue("{as.numeric(stringr::str_sub(observation_date, 2, 5)) + 1}-06-30")))
+           observation_date = as.character(glue::glue("{as.numeric(stringr::str_sub(observation_date, 2, 5)) + 1}-06-30"))) %>%
+    mutate(observation_date = as.Date(observation_date))
 
   return(mh_res_non_geo)
 
@@ -61,7 +62,8 @@ read_aihw_emergency_presentations <- function(url = urls$read_aihw_emergency_pre
     pivot_longer(!sa3_code, names_to = "observation_date", values_to = "value") %>%
     mutate(value = as.numeric(value),
            observation_date = as.character(glue::glue("{as.numeric(stringr::str_sub(observation_date, 2, 5)) + 1}-06-30"))) %>%
-    filter(!is.na(value) & value != 0)
+    filter(!is.na(value) & value != 0) %>%
+    mutate(observation_date = as.Date(observation_date))
 
   return(mh_ed_non_geo)
 
@@ -89,7 +91,8 @@ read_aihw_community_care <- function(url = urls$read_aihw_community_care, filena
     pivot_longer(!sa3_code, names_to = "observation_date", values_to = "value") %>%
     mutate(value = as.numeric(value),
            observation_date = as.character(glue::glue("{as.numeric(stringr::str_sub(observation_date, 2, 5)) + 1}-06-30"))) %>%
-    filter(!is.na(value) & value != 0)
+    filter(!is.na(value) & value != 0) %>%
+    mutate(observation_date = as.Date(observation_date))
 
 return(mh_comm_non_geo)
 
@@ -108,10 +111,9 @@ read_aihw_prescriptions <- function(url = urls$read_aihw_prescriptions, filename
     filter(stringr::str_detect(Count, "Prescriptions")) %>%
     select(sa3_code = `SA3 code`, value = last_col(offset = 1)) %>%
     filter(value != 'n.p.') %>%
-    mutate(observation_date = as.character("2019-20"),
+    mutate(observation_date = as.Date("2019-20"),   # this is buggy
            value = as.numeric(value) * 10,
            sa3_code = as.numeric(sa3_code))
-
 
   return(non_geo_data)
 
