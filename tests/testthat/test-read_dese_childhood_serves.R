@@ -2,7 +2,7 @@
 
 test_that("Read of DESE childhood services Data works", {
 
-  dese <- read_dese_childhood_services()        # fails due to time out. Function needs fixing
+  dese <- read_dese_childhood_services()
 
   expect_s3_class(dese, 'data.frame')
   expect_equal(class(dese$number_of_services), 'numeric')
