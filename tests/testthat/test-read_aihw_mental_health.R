@@ -1,6 +1,6 @@
 # testing read_aihw_mental_health function (contains four functions)
 
-test_that("Read of Australian Institute of Health and Welfare - Mental Health Data works", {
+test_that("Read of Australian Institute of Health and Welfare - care episodes data works", {
 
   care_episodes <- read_aihw_care_episodes()
 
@@ -11,6 +11,9 @@ test_that("Read of Australian Institute of Health and Welfare - Mental Health Da
   expect_equal(colnames(care_episodes), c("sa3_code",
                                           "observation_date",
                                           "value"))
+})
+
+test_that("Read of Australian Institute of Health and Welfare - emergency presentation data works", {
 
   emergency_presentations <- read_aihw_emergency_presentations()
 
@@ -21,6 +24,9 @@ test_that("Read of Australian Institute of Health and Welfare - Mental Health Da
   expect_equal(colnames(emergency_presentations), c("sa3_code",
                                                     "observation_date",
                                                     "value"))
+})
+
+test_that("Read of Australian Institute of Health and Welfare - community care data works", {
 
   community_care <- read_aihw_community_care()
 
@@ -31,6 +37,9 @@ test_that("Read of Australian Institute of Health and Welfare - Mental Health Da
   expect_equal(colnames(community_care), c("sa3_code",
                                                     "observation_date",
                                                     "value"))
+})
+
+test_that("Read of Australian Institute of Health and Welfare - prescriptions data works", {
 
   prescriptions <- read_aihw_prescriptions()
 
@@ -41,27 +50,32 @@ test_that("Read of Australian Institute of Health and Welfare - Mental Health Da
   expect_equal(colnames(prescriptions), c("sa3_code",
                                            "value",
                                            "observation_date"))
-
 })
 
-test_that('read_aihw_mental_health URLs exists', {
+test_that('read_aihw_mental_health care episodes URL exists', {
 
   expect_true(
     RCurl::url.exists(urls$read_aihw_care_episodes)
   )
+})
 
-  expect_true(
+test_that('read_aihw_mental_health community care URL exists', {
+
+    expect_true(
     RCurl::url.exists(urls$read_aihw_community_care)
   )
+})
+
+test_that('read_aihw_mental_health emergency presentations URL exists', {
 
   expect_true(
     RCurl::url.exists(urls$read_aihw_emergency_presentations)
   )
+})
+
+test_that('read_aihw_mental_health prescriptions URL exists', {
 
   expect_true(
     RCurl::url.exists(urls$read_aihw_prescriptions)
   )
-
-
-
 })
