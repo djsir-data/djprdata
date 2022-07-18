@@ -8,7 +8,7 @@ test_that("Read of DSS payment Data works", {
 
   expect_s3_class(dss, 'data.frame')
   expect_equal(class(dss$payments), 'numeric')
-  expect_equal(class(dss$quarter_end_date), 'character')       # probably should be 'Date'?
+  expect_equal(class(dss$quarter_end_date), 'Date')
 
   expect_equal(colnames(dss), c("lga",
                                 "lga_name",

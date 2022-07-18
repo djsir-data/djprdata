@@ -111,10 +111,9 @@ read_dss_payments <- function(url = urls$read_dss_payments, foldername = tempdir
       )
     })
 
-
     dss_month_year <- tmp %>%
-      mutate(quarter_end_date = quarter_end_date) %>%
       mutate_all(as.character) %>%
+      mutate(quarter_end_date = quarter_end_date) %>%
       pivot_longer(!c(LGA, `LGA name`, quarter_end_date),
                    names_to = "payment_type",
                    values_to = "payments") %>%
@@ -126,7 +125,8 @@ read_dss_payments <- function(url = urls$read_dss_payments, foldername = tempdir
       mutate(payments = ifelse(grepl("<", payments), readr::parse_number(payments)/2, payments),
              payments = as.numeric(payments) %>% round())
 
-    all_dss_lga <- all_dss_lga %>% rbind(dss_month_year)
+    all_dss_lga <- all_dss_lga %>% rbind(dss_month_year) %>%
+      mutate(quarter_end_date = as.Date(quarter_end_date))
   }
 
 return(all_dss_lga)
