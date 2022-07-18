@@ -7,6 +7,8 @@
 #' @param url Base url which contains links to all data, default value is: \link[https://data.gov.au/data/dataset/dss-payment-demographic-data/]
 #' @param filename Default folder name is tempdir()
 #'
+#' @importFrom janitor clean_names
+#'
 #' @return data.frame
 #' @export
 #'

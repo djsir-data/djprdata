@@ -73,15 +73,15 @@ read_vic_median_rents <- function(url = urls$read_vic_median_rents,
 
   url <- get_latest_download_url(url, search_term)
 
-  message(glue::glue('Latest Data From: {format(url$date, "%B %Y")}'))
-
   # TODO: check here if data already downloaded?
 
   if (test) {
     filename <- 'test_data/vic_median_rents_qrt_testing.xlsx'
   } else {
 
-    filename <- download_excel(url)
+    filename <- tryCatch({
+      download_excel(url$url)
+    }, error = function(e){download_excel(url$url)})
 
   }
 

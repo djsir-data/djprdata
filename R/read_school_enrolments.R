@@ -13,8 +13,8 @@ read_vic_school_temp <- function(){
 
   suppressMessages({ # parsing warnings and messages
     suppressWarnings({
-      all_schools <- read_csv("raw-data/school-enrolment-2020.csv") %>%
-        clean_names() %>%
+      all_schools <- readr::read_csv("raw-data/school-enrolment-2020.csv") %>%
+        janitor::clean_names() %>%
         distinct(education_sector, school_name, school_type, school_no) %>%
         mutate(school_name = str_to_title(school_name))
     })
@@ -67,7 +67,7 @@ read_vic_school_temp <- function(){
       filter(!school_name %in% school_matched_by_name$school_name) %>%
       write_csv("output/school_not_in_dawn_postcode.csv")
   } else{
-    school_not_matched_by_name <- read_csv("raw-data/school_not_in_dawn_postcode_completed.csv",
+    school_not_matched_by_name <- readr::read_csv("raw-data/school_not_in_dawn_postcode_completed.csv",
                                            col_types = "ccccc")
   }
 
