@@ -4,6 +4,11 @@
 #'
 #' @importFrom ckanr ckanr_setup package_search
 #'
+#' @importFrom ckanr ckanr_setup package_search
+#' @importFrom dplyr mutate select rename_all
+#' @importFrom readr read_csv
+#' @importFrom purrr map_chr map_dfr
+#'
 #' @return
 #' @export
 #'
