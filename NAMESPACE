@@ -2,6 +2,7 @@
 
 export("%>%")
 export(download_excel)
+export(download_file)
 export(read_abs_cabee)
 export(read_abs_payroll)
 export(read_aihw_care_episodes)
@@ -40,3 +41,4 @@ importFrom(readr,read_csv)
 importFrom(stringr,str_to_sentence)
 importFrom(tidyr,fill)
 importFrom(tidyr,pivot_longer)
+importFrom(utils,unzip)
