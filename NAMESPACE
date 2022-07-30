@@ -2,6 +2,7 @@
 
 export("%>%")
 export(download_excel)
+export(download_file)
 export(read_abs_cabee)
 export(read_abs_payroll)
 export(read_aihw_care_episodes)
@@ -46,3 +47,4 @@ importFrom(tidyr,fill)
 importFrom(tidyr,pivot_longer)
 importFrom(zip,unzip)
 importFrom(zip,zip_list)
+
