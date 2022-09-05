@@ -2,7 +2,16 @@
 
 test_that("Read of DESE childhood services Data works", {
 
-  dese <- read_dese_childhood_services()
+  keep_trying <- TRUE
+  while(keep_trying){
+    tryCatch({
+      dese <- read_dese_childhood_services()
+      keep_trying <- FALSE
+    }, warning = function(e){
+      print("second try")
+      keep_trying <- FALSE             # fail safe
+    })
+  }
 
   expect_s3_class(dese, 'data.frame')
   expect_equal(class(dese$number_of_services), 'numeric')
