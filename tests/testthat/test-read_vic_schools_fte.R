@@ -7,7 +7,7 @@ test_that("read_vic_schools_fte works", {
 
   expect_s3_class(fte, 'data.frame')
   expect_equal(class(fte$school_no), 'numeric')
-  expect_equal(class(fte$year), 'character')    # should that be 'Date'?
+  expect_equal(class(fte$year), 'character')
 
   expect_equal(colnames(fte), c("education_sector",
                                 "entity_type",
