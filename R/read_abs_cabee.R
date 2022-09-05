@@ -1,10 +1,12 @@
 #' @title Get ABS Counts of Businesses including Entries and Exits
 #'
-#' @return
+#' @return data.frame
 #' @export
 #' @source https://www.abs.gov.au/statistics/economy/business-indicators/counts-australian-businesses-including-entries-and-exits/latest-release
 #' @examples
-
+#' \dontrun{
+#'   read_abs_cabee()
+#' }
 read_abs_cabee <- function(path = tempdir(), delete = TRUE) {
 	cat_name <- readabs::search_catalogues("entries and exits")$catalogue
 

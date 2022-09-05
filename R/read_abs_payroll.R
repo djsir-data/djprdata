@@ -1,9 +1,12 @@
 #' @title Get ABS Weekly Payroll data
 #'
-#' @return
+#' @return data.frame
 #' @export
 #' @source https://www.abs.gov.au/statistics/labour/earnings-and-work-hours/weekly-payroll-jobs-and-wages-australia/latest-release
 #' @examples
+#' \dontrun{
+#'   read_abs_payroll()
+#' }
 
 read_abs_payroll <- function(path = tempdir(), delete = TRUE) {
 

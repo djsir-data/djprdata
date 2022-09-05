@@ -9,7 +9,7 @@
 #' @importFrom readr read_csv
 #' @importFrom purrr map_chr map_dfr
 #'
-#' @return
+#' @return data.frame
 #' @export
 #'
 #' @examples
