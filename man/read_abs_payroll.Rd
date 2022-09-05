@@ -9,6 +9,14 @@ https://www.abs.gov.au/statistics/labour/earnings-and-work-hours/weekly-payroll-
 \usage{
 read_abs_payroll(path = tempdir(), delete = TRUE)
 }
+\value{
+data.frame
+}
 \description{
 Get ABS Weekly Payroll data
+}
+\examples{
+\dontrun{
+  read_abs_payroll()
+}
 }

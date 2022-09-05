@@ -6,6 +6,9 @@
 \usage{
 read_vic_schools_fte()
 }
+\value{
+data.frame
+}
 \description{
 School Enrolments for Victoria
 }
