@@ -111,14 +111,10 @@ read_aihw_prescriptions <- function(url = urls$read_aihw_prescriptions, filename
     filter(stringr::str_detect(Count, "Prescriptions")) %>%
     select(sa3_code = `SA3 code`, value = last_col(offset = 1)) %>%
     filter(value != 'n.p.') %>%
-    mutate(observation_date = as.Date("2019-20"),   # this is buggy
+    mutate(observation_date = as.Date("2020-06-30"),
            value = as.numeric(value) * 10,
            sa3_code = as.numeric(sa3_code))
 
   return(non_geo_data)
 
 }
-
-
-
-

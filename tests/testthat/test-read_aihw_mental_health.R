@@ -41,11 +41,11 @@ test_that("Read of Australian Institute of Health and Welfare - community care d
 
 test_that("Read of Australian Institute of Health and Welfare - prescriptions data works", {
 
-  prescriptions <- read_aihw_prescriptions()
+  prescriptions <- read_aihw_prescriptions(url = urls$read_aihw_prescriptions, filename = tempfile())
 
   expect_s3_class(prescriptions, 'data.frame')
   expect_equal(class(prescriptions$value), 'numeric')
-  expect_equal(class(prescriptions$observation_date), 'Date')   # there is a bug that needs fixing in the function
+  expect_equal(class(prescriptions$observation_date), 'Date')
 
   expect_equal(colnames(prescriptions), c("sa3_code",
                                            "value",
