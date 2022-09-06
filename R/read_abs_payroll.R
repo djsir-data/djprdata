@@ -1,5 +1,7 @@
 #' @title Get ABS Weekly Payroll data
 #'
+#' @param path Path to where files will be stored, default is tempdir()
+#' @param delete Denotes whether files are to be deleted at end of function or not
 #' @return data.frame
 #' @export
 #' @source https://www.abs.gov.au/statistics/labour/earnings-and-work-hours/weekly-payroll-jobs-and-wages-australia/latest-release
