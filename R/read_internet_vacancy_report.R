@@ -28,7 +28,7 @@ read_internet_vacancy <- function(url = urls$read_internet_vacancy_report, filen
   v_internet_vacancies <- readxl::read_xlsx(filename, sheet = "Averaged") %>%
     filter(State == "VIC",
            !grepl("TOTAL", ANZSCO_TITLE)) %>%
-    pivot_longer(-c(Level, State, region, ANZSCO_CODE, ANZSCO_TITLE), names_to = "date", values_to = "value") %>%
+    pivot_longer(-c(Level, State, Region, ANZSCO_CODE, ANZSCO_TITLE), names_to = "date", values_to = "value") %>%
     mutate(observation_date = openxlsx::convertToDate(date)) %>%
     janitor::clean_names() %>%
     # take only 2-digit anzsco
