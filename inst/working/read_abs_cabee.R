@@ -10,21 +10,21 @@
 read_abs_cabee <- function(path = tempdir(), delete = TRUE) {
 	cat_name <- readabs::search_catalogues("entries and exits")$catalogue
 
-	suppressMessages(
-	readabs::download_abs_data_cube(
-	  cat_name,
-		cube = 10,
-		path = path)
-	)
-	suppressMessages(
-	readabs::download_abs_data_cube(
-	  cat_name,
-		cube = 11,
-		path = path)
-	)
+	cube = get_available_files(cat_name)
+
+	purrr::walk(
+	  cube$file,
+	  ~suppressMessages(
+	    readabs::download_abs_data_cube(
+	      cat_name,
+	      cube = .x,
+	      path = path)
+	    )
+	  )
 
 	file_names <- list.files(path)[grepl("8165", list.files(path))]
 
+	# TODO needs fixing
 	cabee_emp_raw <- suppressMessages(
 		readxl::read_excel(file.path(path, file_names[grepl("10.xls", file_names)]),
 					   sheet = 3)
