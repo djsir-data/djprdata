@@ -22,6 +22,8 @@ read_google_mobility(
 
 \item{sub_region_1}{character code for State Defaults to "Victoria"}
 
+\item{filepath}{Path to where files will be stored, default is tempdir()}
+
 \item{attribution}{logical include Google attribution statement}
 }
 \value{

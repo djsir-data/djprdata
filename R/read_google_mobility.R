@@ -9,6 +9,7 @@
 #' @param url character filename and path
 #' @param region character code for Country. Defaults to "AU"
 #' @param sub_region_1 character code for State Defaults to "Victoria"
+#' @param filepath Path to where files will be stored, default is tempdir()
 #' @param attribution logical include Google attribution statement
 #'
 #' @importFrom zip unzip zip_list
