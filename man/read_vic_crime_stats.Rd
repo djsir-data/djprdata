@@ -24,9 +24,13 @@ read_vic_crime_stats(
 
 \item{suburb_input}{Optional. Filter by Suburb (i.e. "Dederang")}
 
+\item{postcode_input}{Optional. Filter by Postcode}
+
 \item{dim_code_input}{Optional. Filter by dim code (i.e. 11)}
 
 \item{offence_div_code_input}{Optional. Filter by Offence Code (i.e. "A")}
+
+\item{test}{logical for testing to avoid repeatedly downloading data}
 }
 \value{
 data.frame

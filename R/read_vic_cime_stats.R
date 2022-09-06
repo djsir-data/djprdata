@@ -15,10 +15,12 @@
 #' }
 #'
 #' @param dataset Required. select the database c("offence_by_location_by_lga", "offence_by_postcode_suburb", "offence_rate_by_lga", "reported_offence_rate_lga")
-#' @param dim_code_input Optional. Filter by dim code (i.e. 11)
 #' @param lga_input Optional. Filter by LGA (i.e. "Alpine")
 #' @param suburb_input Optional. Filter by Suburb (i.e. "Dederang")
+#' @param postcode_input Optional. Filter by Postcode
+#' @param dim_code_input Optional. Filter by dim code (i.e. 11)
 #' @param offence_div_code_input Optional. Filter by Offence Code (i.e. "A")
+#' @param test logical for testing to avoid repeatedly downloading data
 #'
 #' @import rvest
 #' @import httr
