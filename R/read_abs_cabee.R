@@ -11,14 +11,16 @@ read_abs_cabee <- function(path = tempdir(), delete = TRUE) {
 	cat_name <- readabs::search_catalogues("entries and exits")$catalogue
 
 	suppressMessages(
-	readabs::download_abs_data_cube("counts-australian-businesses-including-entries-and-exits",
-									cube = 10,
-									path = path)
+	readabs::download_abs_data_cube(
+	  cat_name,
+		cube = 10,
+		path = path)
 	)
 	suppressMessages(
-	readabs::download_abs_data_cube("counts-australian-businesses-including-entries-and-exits",
-									cube = 11,
-									path = path)
+	readabs::download_abs_data_cube(
+	  cat_name,
+		cube = 11,
+		path = path)
 	)
 
 	file_names <- list.files(path)[grepl("8165", list.files(path))]
