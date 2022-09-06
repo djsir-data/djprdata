@@ -9,7 +9,7 @@ Description: More about what it does (maybe more than one line)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Imports:
     assertthat,
     ckanr,
@@ -26,7 +26,11 @@ Imports:
     readxl,
     rvest,
     stringr,
-    tidyr
+    tidyr,
+    janitor,
+    zip,
+    fs,
+    openxlsx
 Suggests: 
     covr,
     knitr,
@@ -35,4 +39,3 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
-

@@ -9,9 +9,19 @@ https://www.abs.gov.au/statistics/labour/earnings-and-work-hours/weekly-payroll-
 \usage{
 read_abs_payroll(path = tempdir(), delete = TRUE)
 }
-\value{
+\arguments{
+\item{path}{Path to where files will be stored, default is tempdir()}
 
+\item{delete}{Denotes whether files are to be deleted at end of function or not}
+}
+\value{
+data.frame
 }
 \description{
 Get ABS Weekly Payroll data
+}
+\examples{
+\dontrun{
+  read_abs_payroll()
+}
 }

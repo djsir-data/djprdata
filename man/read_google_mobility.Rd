@@ -16,11 +16,13 @@ read_google_mobility(
 )
 }
 \arguments{
+\item{url}{character filename and path}
+
 \item{region}{character code for Country. Defaults to "AU"}
 
 \item{sub_region_1}{character code for State Defaults to "Victoria"}
 
-\item{filepath}{character filename and path}
+\item{filepath}{Path to where files will be stored, default is tempdir()}
 
 \item{attribution}{logical include Google attribution statement}
 }

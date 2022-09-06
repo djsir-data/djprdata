@@ -1,9 +1,14 @@
 #' @title Get ABS Weekly Payroll data
 #'
-#' @return
+#' @param path Path to where files will be stored, default is tempdir()
+#' @param delete Denotes whether files are to be deleted at end of function or not
+#' @return data.frame
 #' @export
 #' @source https://www.abs.gov.au/statistics/labour/earnings-and-work-hours/weekly-payroll-jobs-and-wages-australia/latest-release
 #' @examples
+#' \dontrun{
+#'   read_abs_payroll()
+#' }
 
 read_abs_payroll <- function(path = tempdir(), delete = TRUE) {
 
@@ -24,7 +29,7 @@ read_abs_payroll <- function(path = tempdir(), delete = TRUE) {
 	names(df_payroll) <- tolower(gsub(" ", "_", as.character(df_payroll[5,])))
 
 	df_payroll <- df_payroll %>%
-		tail(-5) %>%
+		utils::tail(-5) %>%
 		tidyr::pivot_longer(cols = 4:dplyr::last_col(),
 					 names_to = "date") %>%
 		dplyr::filter(!grepl("NA",value)) %>%

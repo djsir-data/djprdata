@@ -25,7 +25,7 @@ read_jobseeker_payments <- function(url = urls$read_jobseeker_payments) {
   links <- rvest::html_attr(rvest::html_nodes(pg, "a"), "href") %>%
     as_tibble() %>%
     # Links to xlsx files only as these hold the data we need
-    filter(str_detect(value, "\\.xlsx$")) %>%
+    filter(stringr::str_detect(value, "\\.xlsx$")) %>%
     rename(url = value) %>%
     unique() %>%
     # Extract filename
@@ -51,6 +51,7 @@ read_jobseeker_payments <- function(url = urls$read_jobseeker_payments) {
         keep_trying <- FALSE
       }, warning = function(e){
         print("second try")
+        keep_trying <- FALSE             # fail safe
       })
     }
 
@@ -70,7 +71,7 @@ read_jobseeker_payments <- function(url = urls$read_jobseeker_payments) {
       janitor::clean_names() %>%
       drop_na(sa2_name) %>% # remove Unknown, Total, and other random footer rows
       # Some payments are presented like "<5" replace these with a value in the middle (since it's count)
-      dplyr::mutate(value = ifelse(grepl("<", job_seeker_payment), parse_number(job_seeker_payment)/2, job_seeker_payment),
+      dplyr::mutate(value = ifelse(grepl("<", job_seeker_payment), readr::parse_number(job_seeker_payment)/2, job_seeker_payment),
              value = as.numeric(value) %>% round(),
              month = this_month,
              year = this_year) %>%

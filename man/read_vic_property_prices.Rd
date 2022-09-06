@@ -36,6 +36,8 @@ read_vic_property_prices(
 )
 }
 \arguments{
+\item{url}{character filename and path}
+
 \item{include}{character the data set includes multiple temporal groupings
 that can be automatically filtered. Options are:
 \itemize{

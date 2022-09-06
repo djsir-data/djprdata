@@ -2,15 +2,15 @@
 % Please edit documentation in R/read_vic_schools_fte.R
 \name{read_vic_schools_fte}
 \alias{read_vic_schools_fte}
-\title{School Enrollments for Victoria}
+\title{School Enrolments for Victoria}
 \usage{
 read_vic_schools_fte()
 }
 \value{
-
+data.frame
 }
 \description{
-School Enrollments for Victoria
+School Enrolments for Victoria
 }
 \examples{
 \dontrun{
