@@ -27,12 +27,10 @@ Imports:
     rvest,
     stringr,
     tidyr,
-    ckanr,
     janitor,
     zip,
     fs,
-    openxlsx,
-    readr
+    openxlsx
 Suggests: 
     covr,
     knitr,
