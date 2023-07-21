@@ -1,9 +1,16 @@
 #' @title National Skills Commission's Internet Vacancy Report
 #'
 #' @description Extracting and cleaning monthly online job advertisements
-#' for Melbourne from NSC's Internet Vacancy Report. Data is filtered by 2-digit ANZSCO
+#'  from JSA's Internet Vacancy Index Report.
 #'
-#' @param url Base url which contains links to all data, default url is: \link[https://labourmarketinsights.gov.au/our-research/internet-vacancy-index/]
+#' @param url Base url which contains links to all data, default url is: \link[https://www.jobsandskills.gov.au/work/internet-vacancy-index]
+#' @param dataset character id of dataset to be downloaded. Must be one of:
+#' \itemize{
+#'   \item{skills}{anzsco_skill_level_states_and_territories}
+#'   \item{occupations}{anzsco4_occupations_states_and_territories}
+#'   \item{occupations_skills}{anzsco2_occupations_skill_level_states_and_territories}
+#'   \item{regions}{anzsco2_occupations_ivi_regions}
+#' }
 #' @param filename Default filename is tempfile()
 #'
 #' @return data.frame
@@ -11,27 +18,47 @@
 #'
 #' @examples
 #' \dontrun{
-#'   df <- read_read_internet_vacancy()
+#'   df <- read_read_internet_vacancy(dataset = 'skills')
 #' }
+#'
+read_internet_vacancy <- function(url = urls$read_internet_vacancy_report,
+                                  dataset = c('skills', 'occupations', 'occupation_skills', 'regions'),
+                                  filename = tempfile()) {
 
-read_internet_vacancy <- function(url = urls$read_internet_vacancy_report, filename = tempfile()) {
+  dataset <- match.arg(dataset)
 
-  search_term <- 'ivi_data_regional-may-2010-onwards.xlsx'
+  datasets <- list(
+    skills = "anzsco_skill_level_states_and_territories",
+    occupations = "anzsco4_occupations_states_and_territories",
+    occupation_skills = "anzsco2_occupations_skill_level_states_and_territories",
+    regions = "anzsco2_occupations_ivi_regions"
+  )
 
-  links <- djprdata:::get_latest_download_url(url, search_term)
+  dataset <- datasets[[dataset]]
 
-  djprdata:::download_excel(links$url, filepath = filename)
+  links <- djprdata:::get_latest_download_url(url, '\\.xlsx')
 
-  v_internet_vacancies <- readxl::read_xlsx(filename, sheet = "Averaged") %>%
-    filter(State == "VIC",
-           !grepl("TOTAL", ANZSCO_TITLE)) %>%
-    pivot_longer(-c(Level, State, region, ANZSCO_CODE, ANZSCO_TITLE), names_to = "date", values_to = "value") %>%
-    mutate(observation_date = openxlsx::convertToDate(date)) %>%
-    janitor::clean_names() %>%
-    # take only 2-digit anzsco
-    filter(nchar(anzsco_code) == 2) %>%
-    filter(region == "Melbourne")
+  link <- grep(dataset, links$url, value = TRUE)
 
-return(v_internet_vacancies)
+  djprdata:::download_excel(link, filepath = filename)
+
+  sheets <- readxl::excel_sheets(filename)
+  sheets <- sheets[sheets != 'Notes']
+
+  data <- sheets |>
+    purrr::map_dfr(function(sht){
+      readxl::read_excel(filename, sheet = sht) |>
+        mutate(dataset = dataset,
+               measure = sht) |>
+        tidyr::pivot_longer(cols = matches('\\d{5}'),
+                            names_to = "date",
+                            values_to = "value") |>
+        mutate(
+          date = as.Date(as.numeric(date), origin = "1899-12-30"),
+          value = as.numeric(value)
+        )
+    })
+
+  return(data)
 
 }

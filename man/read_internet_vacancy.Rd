@@ -6,11 +6,20 @@
 \usage{
 read_internet_vacancy(
   url = urls$read_internet_vacancy_report,
+  dataset = c("skills", "occupations", "occupation_skills", "regions"),
   filename = tempfile()
 )
 }
 \arguments{
-\item{url}{Base url which contains links to all data, default url is: \link[https://labourmarketinsights.gov.au/our-research/internet-vacancy-index/]}
+\item{url}{Base url which contains links to all data, default url is: \link[https://www.jobsandskills.gov.au/work/internet-vacancy-index]}
+
+\item{dataset}{character id of dataset to be downloaded. Must be one of:
+\itemize{
+  \item{skills}{anzsco_skill_level_states_and_territories}
+  \item{occupations}{anzsco4_occupations_states_and_territories}
+  \item{occupations_skills}{anzsco2_occupations_skill_level_states_and_territories}
+  \item{regions}{anzsco2_occupations_ivi_regions}
+}}
 
 \item{filename}{Default filename is tempfile()}
 }
@@ -19,10 +28,11 @@ data.frame
 }
 \description{
 Extracting and cleaning monthly online job advertisements
-for Melbourne from NSC's Internet Vacancy Report. Data is filtered by 2-digit ANZSCO
+ from JSA's Internet Vacancy Index Report.
 }
 \examples{
 \dontrun{
-  df <- read_read_internet_vacancy()
+  df <- read_read_internet_vacancy(dataset = 'skills')
 }
+
 }
