@@ -9,9 +9,6 @@ https://www.abs.gov.au/statistics/economy/business-indicators/counts-australian-
 \usage{
 read_abs_cabee(path = tempdir(), delete = TRUE)
 }
-\value{
-
-}
 \description{
 Get ABS Counts of Businesses including Entries and Exits
 }

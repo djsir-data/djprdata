@@ -9,9 +9,6 @@ https://lmip.gov.au/default.aspx?LMIP/GainInsights/VacancyReport
 \usage{
 read_ivi(path = tempdir(), delete = TRUE)
 }
-\value{
-
-}
 \description{
 Get LMIP Internet Vacancy Index data
 }
