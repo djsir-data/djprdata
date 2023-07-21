@@ -34,7 +34,7 @@ test_that("Vic property prices URL's have not changed", {
   search_term <- 'house|unit|vacant'
 
   url <- djprdata:::get_latest_download_url(url, search_term)
-  url$url <- url$url[endsWith(url$url, '.xls')]
+  url$url <- url$url[endsWith(url$url, '.xlsx')]
 
   expect_false(httr::http_error(url$base_url))
 
