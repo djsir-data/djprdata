@@ -22,25 +22,25 @@
 #' }
 #'
 read_internet_vacancy <- function(url = urls$read_internet_vacancy_report,
-                                  dataset = c('skills', 'occupations', 'occupation_skills', 'regions'),
+                                  dataset = c('skills', 'occupations', 'occupation_anzsco2', 'regions'),
                                   filename = tempfile()) {
 
   dataset <- match.arg(dataset)
 
   datasets <- list(
-    skills = "anzsco_skill_level_states_and_territories",
-    occupations = "anzsco4_occupations_states_and_territories",
-    occupation_skills = "anzsco2_occupations_skill_level_states_and_territories",
-    regions = "anzsco2_occupations_ivi_regions"
+    skills = "skill",
+    occupations = "anzsco4",
+    occupation_anzsco2 = 'ANZSCO2%20Occupations%2C%20States',
+    regions = "region"
   )
 
   dataset <- datasets[[dataset]]
 
   links <- djprdata:::get_latest_download_url(url, '\\.xlsx')
 
-  link <- grep(dataset, links$url, value = TRUE)
+  link_n <- grep(dataset, basename(links$url), value = FALSE, ignore.case = TRUE)
 
-  djprdata:::download_excel(link, filepath = filename)
+  djprdata:::download_excel(links[link_n], filepath = filename)
 
   sheets <- readxl::excel_sheets(filename)
   sheets <- sheets[sheets != 'Notes']
