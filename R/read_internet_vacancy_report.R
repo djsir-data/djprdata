@@ -40,7 +40,7 @@ read_internet_vacancy <- function(url = urls$read_internet_vacancy_report,
 
   link_n <- grep(dataset, basename(links$url), value = FALSE, ignore.case = TRUE)
 
-  djprdata:::download_excel(links[link_n], filepath = filename)
+  djprdata:::download_excel(links$url[link_n], filepath = filename)
 
   sheets <- readxl::excel_sheets(filename)
   sheets <- sheets[sheets != 'Notes']
